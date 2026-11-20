@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8">
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=b8561e4d-ced4-46e4-a2fe-4d1a6dd2e53a
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. --><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FENOMIND — Mental Wellbeing Screening</title>
+<style>
+:root{--ink:#262b50;--muted:#717596;--lav:#ebe8ff;--lav2:#dcd7ff;--purple:#7169bd;--purpleD:#57509f;--line:#e6e4f4;--bg:#f7f6ff;--mint:#e8f7f2;--white:#fff}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:linear-gradient(140deg,#faf9ff,#f0efff 56%,#eef7ff);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}header{height:72px;position:sticky;top:0;z-index:10;background:#ffffffd9;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}nav{max-width:1100px;height:100%;margin:auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:850;font-size:21px;letter-spacing:-.4px}.brand span{color:#8c80de}.nav{display:flex;gap:6px}.nav button{border:0;background:transparent;padding:10px 15px;border-radius:28px;color:var(--ink);font-weight:650;cursor:pointer}.nav button.active,.nav button:hover{background:var(--lav);color:#554d9a}main{max-width:1100px;margin:auto;padding:30px 22px 70px}.page{display:none}.page.active{display:block}.hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:28px;padding:22px 0 34px}.pill{display:inline-block;background:#eae7ff;color:#514a9b;border-radius:28px;padding:8px 13px;font-size:13px;font-weight:750}.h1{font-size:clamp(36px,5vw,57px);line-height:1.06;letter-spacing:-1.6px;margin:18px 0}.lead{font-size:17px;color:var(--muted);line-height:1.7;max-width:540px}.btn{border:0;background:var(--purple);color:#fff;padding:13px 20px;border-radius:30px;font-weight:750;cursor:pointer;box-shadow:0 6px 16px #7169bd20}.btn:hover{background:var(--purpleD)}.btn.alt{background:#fff;color:var(--purple);border:1px solid #cbc7ef;box-shadow:none}.btn:disabled{opacity:.45;cursor:not-allowed}.heroart{min-height:310px;border-radius:30px;background:linear-gradient(145deg,#e4e1ff,#f4f1ff,#e2f1ff);display:grid;place-items:center;position:relative;overflow:hidden}.heroart .emoji{font-size:92px;z-index:1}.heroart .quote{position:absolute;bottom:22px;left:22px;background:#ffffffcc;padding:12px 16px;border-radius:16px;color:#555980}.featuregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{border:1px solid #efedf9;background:#ffffffd4;border-radius:22px;padding:21px;box-shadow:0 8px 26px #40407708}.card h3{margin:10px 0 6px}.card p{color:var(--muted);line-height:1.6;margin:0}.icon{font-size:26px}.heading h1{font-size:32px;margin:0 0 8px;letter-spacing:-.6px}.heading p{color:var(--muted);margin:0;line-height:1.6}.panel{max-width:800px;margin:22px auto;background:#ffffffdb;border:1px solid var(--line);border-radius:25px;padding:25px;box-shadow:0 12px 32px #41417a09}.stepmeta{display:flex;justify-content:space-between;color:var(--muted);font-size:14px}.progress{height:8px;background:#e9e7f8;border-radius:10px;margin:12px 0 24px;overflow:hidden}.progress>div{height:100%;width:0;background:linear-gradient(90deg,#897ce0,#b2a8fa);border-radius:10px;transition:width .25s}.question{font-size:22px;line-height:1.45;margin:0 0 10px}.subq{color:var(--muted);font-size:14px;margin:0 0 18px;line-height:1.55}.answer{width:100%;min-height:130px;resize:vertical;border:1px solid var(--line);background:#fbfaff;border-radius:15px;padding:15px;font:inherit;color:var(--ink);line-height:1.55;outline:none}.answer:focus{border-color:#aaa1e9;box-shadow:0 0 0 3px #e8e4ff}.voicebar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:12px 0}.voiceStatus{font-size:13px;color:var(--muted)}.actions{display:flex;justify-content:space-between;gap:10px;margin-top:20px}.privacy{font-size:12px;color:#8789a3;line-height:1.5;margin-top:16px}.videobox{background:#22243a;border-radius:20px;overflow:hidden;aspect-ratio:16/9;position:relative;display:grid;place-items:center;margin:14px 0}.videobox video{width:100%;height:100%;object-fit:cover}.videobox .cameraPlaceholder{color:#fff;text-align:center;padding:20px}.videoControls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.videoStatus{font-size:13px;color:var(--muted)}.videoPrompt{background:#f0edff;border-radius:15px;padding:14px 16px;margin:14px 0;color:#555081;line-height:1.5}.videoPrompt strong{display:block;color:#373b64;margin-bottom:4px}.clips{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px}.clipcard{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fbfaff}.clipcard video{width:100%;border-radius:12px;max-height:190px;background:#202238}.clipcard small{color:var(--muted)}.resultgrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.resulttile{background:linear-gradient(145deg,#efecff,#fff);text-align:center}.resulttile .big{font-size:40px;margin:12px 0}.status{display:inline-block;border-radius:25px;background:#e9e7ff;padding:7px 12px;color:#554f95;font-weight:700;font-size:13px}.list{padding:0;list-style:none;line-height:1.7;color:#5c6080}.list li{margin:7px 0}.notice{background:#f1f5ff;border:1px solid #e0e9ff;border-radius:16px;padding:15px;color:#626988;line-height:1.55;margin-top:15px;font-size:13px}.supportgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.supportgrid .card:nth-child(2){background:#f1f6ff}.supportgrid .card:nth-child(3){background:#effaf6}.footer{text-align:center;color:#898ba5;font-size:12px;padding:20px}
+@media(max-width:720px){nav{padding:0 12px}.nav button{padding:9px 10px;font-size:13px}.hero{grid-template-columns:1fr}.heroart{min-height:230px}.featuregrid,.supportgrid,.resultgrid{grid-template-columns:1fr}.panel{padding:19px}.clips{grid-template-columns:1fr}main{padding:20px 14px 55px}}
+
+.ai{margin-top:18px}.ai .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.apiStatus{font-size:13px;color:var(--muted)}
+.apiStatus b{color:var(--ink)}.ai input[type=file]{font-size:13px}.score{display:flex;align-items:baseline;gap:10px;margin:6px 0}
+.score .val{font-size:34px;font-weight:850;letter-spacing:-1px}.bar{height:10px;border-radius:6px;background:#eceaf8;overflow:hidden;margin:6px 0 10px}
+.bar>div{height:100%;background:linear-gradient(90deg,#9b93e6,#7169bd)}.tag{display:inline-block;font-size:12px;font-weight:750;border-radius:20px;padding:4px 10px;background:#eae7ff;color:#514a9b}
+.tag.warn{background:#fff1dc;color:#8a5a00}.chips span{display:inline-block;margin:3px 4px 0 0;padding:4px 9px;border-radius:14px;background:#f2f0ff;font-size:13px}
+.prompts{display:grid;gap:10px;margin-top:8px}.prompts .card{padding:14px 16px}.err{color:#b13a3a}.safetybox{border:2px solid #e3b4b4;background:#fff6f6;border-radius:20px;padding:20px;margin:14px 0}
+.small{font-size:13px;color:var(--muted);line-height:1.6}.aigrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px;margin-top:12px}
+</style></head>
+<body>
+<header><nav><div class="brand"><span>◉</span> FENOMIND</div><div class="nav"><button data-page="home" class="active">Home</button><button data-page="screen">Integrated Screening</button><button data-page="support">Support</button></div></nav></header>
+<main>
+<section class="page active" id="home">
+<div class="hero"><div><span class="pill">✦ Mental wellbeing space for students</span><h1 class="h1">Pause. Reflect.<br>Understand yourself.</h1><p class="lead">FENOMIND adalah ruang check-in untuk mahasiswa. Ceritakan apa yang kamu rasakan melalui jawaban tertulis atau suara, lalu lanjutkan dengan video interview singkat.</p><button class="btn" onclick="go('screen')">Mulai screening →</button><p class="privacy">Self-paced · Berbasis refleksi · Tidak menghakimi</p></div><div class="heroart"><div class="emoji">☁️ 🫶</div><div class="quote">“You deserve space to understand how you feel.”</div></div></div>
+<div class="featuregrid"><div class="card"><div class="icon">✎</div><h3>Refleksi tertulis</h3><p>Jawab prompt tentang perasaan, aktivitas, dan keseharianmu.</p></div><div class="card"><div class="icon">🎙</div><h3>Voice response</h3><p>Jawab dengan suara. Jika browser mendukung, ucapanmu ditranskripsikan ke teks.</p></div><div class="card"><div class="icon">◉</div><h3>Video interview</h3><p>Rekam respons singkat melalui kamera untuk input visual dalam tahap riset.</p></div></div>
+<div class="notice" id="homeNotice"></div></section>
+<section class="page" id="screen"><div class="heading"><h1>Integrated Screening Session</h1><p>Jawab pertanyaan dengan mengetik atau berbicara. Kamera dapat merekam respons pada pertanyaan yang sama—semua input dikumpulkan dalam satu sesi.</p></div>
+<div class="panel">
+<div class="stepmeta"><span id="qtype">Interview · Text + Voice + Video</span><span id="step">Prompt 1 dari 4</span></div><div class="progress"><div id="prog"></div></div>
+<div class="videoPrompt"><strong id="q"></strong><span id="prompt"></span></div>
+<div class="resultgrid">
+<div><label class="subq" for="answer">Jawaban teks / transkrip voice-to-text</label><textarea class="answer" id="answer" placeholder="Ketik jawabanmu, atau gunakan tombol voice-to-text..."></textarea>
+<div class="voicebar"><button class="btn alt" id="voiceBtn" onclick="toggleSpeech()">🎙 Mulai voice-to-text</button><span class="voiceStatus" id="voiceStatus">Voice response akan ditranskripsikan jika browser mendukung.</span></div>
+<div class="notice"><b>Tips:</b> Kamu boleh menjawab dengan tulisan atau suara. Tidak perlu memaksakan jawaban.</div></div>
+<div><div class="videobox"><video id="liveVideo" autoplay muted playsinline></video><div class="cameraPlaceholder" id="cameraPlaceholder">Preview kamera akan muncul setelah kamu mengaktifkannya.</div></div><div class="videoControls"><button class="btn alt" onclick="startCamera()">Aktifkan kamera</button><button class="btn" id="recordBtn" onclick="toggleRecording()" disabled>● Rekam jawaban prompt ini</button><span class="videoStatus" id="videoStatus">Video per prompt (opsional).</span></div><div class="clips" id="clips"></div></div>
+<div class="actions"><button class="btn alt" id="back" onclick="prevQ()">← Sebelumnya</button><button class="btn" id="next" onclick="nextQ()">Selanjutnya →</button></div>
+<p class="privacy" id="screenPrivacy"></p></div></section>
+<section class="page" id="result"><div class="heading"><h1>Session Overview</h1><p>Berikut rangkuman input yang kamu berikan pada sesi ini.</p></div><div class="resultgrid"><div class="card resulttile"><div class="icon">✿</div><div class="big">Input terkumpul</div><span class="status" id="inputStatus">Session summary</span><p id="summaryCount"></p></div><div class="card"><h2>Input untuk analisis</h2><ul class="list" id="inputList"></ul><p class="notice" id="resultNotice"></p><button class="btn alt" onclick="go('support')">Lihat dukungan →</button></div></div><section class="card ai" id="aiPanel"><h2>Analisis FENOMIND AI</h2>
+<p class="apiStatus" id="apiStatus"></p>
+<div class="row"><label class="small" for="ofCsv">Opsional (demo visual): CSV fitur OpenFace</label><input type="file" id="ofCsv" accept=".csv"></div>
+<div class="row" style="margin-top:10px"><button class="btn" id="analyzeBtn" onclick="analyze()">Analisis dengan FENOMIND AI</button></div>
+<div id="aiResult"></div></section>
+<div class="actions"><button class="btn alt" onclick="restart()">Mulai sesi baru</button><button class="btn" onclick="go('home')">Kembali ke Home</button></div></section>
+<section class="page" id="support"><div class="heading" style="text-align:center"><h1>Support, when you need it</h1><p>Kamu tidak harus menghadapi semuanya sendirian.</p></div><div class="supportgrid"><div class="card"><div class="icon">♡</div><h3>Orang yang kamu percaya</h3><p>Mulai dari teman, keluarga, atau orang kampus yang membuatmu merasa aman untuk bercerita.</p></div><div class="card"><div class="icon">☏</div><h3>Konseling kampus</h3><p>Hubungi layanan konseling mahasiswa atau unit kesehatan mental kampus.</p></div><div class="card"><div class="icon">✚</div><h3>Profesional kesehatan</h3><p>Jika perasaan berat atau mengganggu aktivitas, pertimbangkan bantuan psikolog atau psikiater.</p></div></div><div class="notice"><b>Jika kamu merasa tidak aman atau berisiko menyakiti diri sendiri,</b> segera hubungi orang yang dapat mendampingi secara langsung atau layanan darurat setempat.</div></section>
+</main><div class="footer">FENOMIND · Prototype multimodal mental wellbeing screening · Bukan alat diagnosis</div>
+<script>
+const questions=[
+{title:"Mood dan perasaan",text:"Dalam dua minggu terakhir, bagaimana suasana hati kamu? Ceritakan perasaan yang paling sering muncul dan apa yang mungkin memengaruhinya.",type:"Mood"},
+{title:"Minat, motivasi, dan energi",text:"Apakah aktivitas yang biasanya kamu nikmati terasa berbeda akhir-akhir ini? Bagaimana perubahan energi atau motivasi itu memengaruhi keseharianmu?",type:"Motivation"},
+{title:"Aktivitas dan tuntutan kuliah",text:"Bagaimana tidur, fokus belajar, interaksi, dan rutinitas harianmu belakangan ini? Bagian mana yang terasa lebih berat?",type:"Daily life"},
+{title:"Cara menghadapi tekanan",text:"Ketika merasa sedih, tertekan, atau kewalahan, apa yang biasanya kamu lakukan? Apakah kamu merasa punya dukungan yang cukup?",type:"Coping"}
+];
+let qi=0,answers=Array(questions.length).fill(""),stream=null,recorder=null,recorded=Array(questions.length).fill(null),chunks=[];
+const $=id=>document.getElementById(id);
+function go(id){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));$(id).classList.add("active");document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo({top:0,behavior:"smooth"});if(id==="screen")renderQ();if(id==="result"){renderSummary();if(API&&!$("aiResult").innerHTML)analyze()}}
+document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>go(b.dataset.page));
+function renderQ(){ $("q").textContent=questions[qi].title;$("prompt").textContent=questions[qi].text;$("qtype").textContent="Multimodal interview · Text + Voice + Video";$("step").textContent=`Prompt ${qi+1} dari ${questions.length}`;$("prog").style.width=((qi+1)/questions.length*100)+"%";$("answer").value=answers[qi];$("back").disabled=qi===0;$("next").textContent=qi===questions.length-1?"Lihat session overview →":"Selanjutnya →";$("videoStatus").textContent=recorded[qi]?"Video prompt ini sudah direkam. Rekam ulang jika ingin.":"Video respons prompt ini opsional.";renderClipsForPrompt()}
+$("answer").addEventListener("input",()=>answers[qi]=$("answer").value);
+function nextQ(){answers[qi]=$("answer").value;if(qi<questions.length-1){qi++;renderQ()}else go("result")}
+function prevQ(){answers[qi]=$("answer").value;if(qi>0){qi--;renderQ()}}
+let recognition=null,speechOn=false;
+function toggleSpeech(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$("voiceStatus").textContent="Speech-to-text browser tidak tersedia. Coba Chrome/Edge atau ketik jawaban.";return}if(speechOn){recognition?.stop();speechOn=false;return}recognition=new SR();recognition.lang="id-ID";recognition.continuous=true;recognition.interimResults=true;speechOn=true;$("voiceBtn").textContent="■ Berhenti voice-to-text";$("voiceStatus").textContent="Mendengarkan... silakan mulai berbicara.";let finalText="";recognition.onresult=e=>{let interim="";for(let n=e.resultIndex;n<e.results.length;n++){let t=e.results[n][0].transcript;if(e.results[n].isFinal)finalText+=t+" ";else interim+=t}$("answer").value=((answers[qi]||"")+finalText+interim).trim();answers[qi]=$("answer").value};recognition.onerror=e=>{$("voiceStatus").textContent="Mic/STT error: "+e.error;speechOn=false;$("voiceBtn").textContent="🎙 Mulai voice-to-text"};recognition.onend=()=>{speechOn=false;$("voiceBtn").textContent="🎙 Mulai voice-to-text";if($("voiceStatus").textContent==="Mendengarkan... silakan mulai berbicara.")$("voiceStatus").textContent="Voice-to-text berhenti."};recognition.start()}
+function finalies(s){return s}
+async function startCamera(){try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"},audio:true});$("liveVideo").srcObject=stream;$("liveVideo").muted=true;$("cameraPlaceholder").style.display="none";$("recordBtn").disabled=false;$("videoStatus").textContent="Kamera/mikrofon aktif. Kamu bisa merekam respons prompt yang sedang tampil."}catch(e){$("videoStatus").textContent="Akses kamera gagal: "+e.message+" Pastikan izin browser dan HTTPS."}}
+function toggleRecording(){if(recorder&&recorder.state==="recording"){recorder.stop();$("recordBtn").textContent="● Rekam jawaban prompt ini";return}if(!stream){startCamera();return}chunks=[];try{recorder=new MediaRecorder(stream);recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};recorder.onstop=()=>{let blob=new Blob(chunks,{type:recorder.mimeType||"video/webm"});let url=URL.createObjectURL(blob);recorded[qi]={url,blob};$("videoStatus").textContent=`Video prompt ${qi+1} tersimpan sementara (${Math.round(blob.size/1024)} KB).`;renderClipsForPrompt()};recorder.start();$("recordBtn").textContent="■ Stop recording";$("videoStatus").textContent="Recording... jawab secara natural, sekitar 15–30 detik."}catch(e){$("videoStatus").textContent="Recording gagal: "+e.message}}
+function renderClipsForPrompt(){const area=$("clips");area.innerHTML="";let clip=recorded[qi];if(!clip)return;let d=document.createElement("div");d.className="clipcard";d.innerHTML=`<b>Video respons — prompt ${qi+1}</b><br><small>${questions[qi].title}</small><video controls src="${clip.url}"></video><div style="margin-top:8px"><button class="btn alt" onclick="recordAgain()">Re-record this prompt</button></div>`;area.appendChild(d)}
+function recordAgain(){recorded[qi]=null;renderClipsForPrompt();$("videoStatus").textContent="Klik record saat siap merekam ulang prompt ini."}
+function renderSummary(){let answered=answers.filter(a=>a.trim().length>0).length,clipsCount=recorded.filter(Boolean).length;$("summaryCount").textContent=`${answered}/${questions.length} jawaban teks terisi · ${clipsCount}/${questions.length} video respons direkam. Input dipasangkan per prompt.`;$("inputStatus").textContent=answered>0||clipsCount>0?"Input sesi terkumpul":"Belum ada input";$("inputList").innerHTML=`<li>✎ Refleksi/linguistik: ${answered}/${questions.length} prompt terisi</li><li>🎙 Voice-to-text: jawaban lisan dapat ditranskripsikan ke teks (dukungan browser)</li><li>◉ Visual/video: ${clipsCount}/${questions.length} video prompt tersimpan pada sesi browser</li><li>⊙ Multimodal fusion: ${API?"model terlatih belum tersedia; ditampilkan gabungan sederhana (heuristik)":"belum aktif pada mode demo"}</li>`}
+
+/* ===== FENOMIND AI: sambungan ke backend =====
+   Alamat backend: buka website dengan ?api=https://alamat-backend (disimpan di browser),
+   atau isi DEFAULT_API di bawah. Tanpa alamat, website berjalan dalam mode demo. */
+const DEFAULT_API="";
+const API=(()=>{let q=new URLSearchParams(location.search).get("api");try{if(q)localStorage.setItem("fenomind_api",q);q=q||localStorage.getItem("fenomind_api")}catch(e){}return (q||DEFAULT_API||"").trim().replace(/\/+$/,"")})();
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pct=p=>p==null?"–":(Math.round(p*100)/100).toFixed(2);
+function setNotices(){
+ if(API){$("homeNotice").innerHTML="<b>Catatan:</b> Analisis AI aktif (prototipe riset). Jawabanmu dikirim ke backend FENOMIND hanya untuk dianalisis dan tidak disimpan. Ini <b>bukan alat diagnosis</b>.";
+  $("screenPrivacy").textContent="Teks, transkrip, dan video diikat pada prompt yang sama sebagai satu sesi multimodal. Saat kamu meminta analisis, input dikirim ke backend FENOMIND, diproses, lalu tidak disimpan.";
+  $("resultNotice").textContent="Hasil AI adalah skrining awal berbasis kemiripan pola dengan data latih, bukan diagnosis.";
+  $("apiStatus").innerHTML="Backend: <b>"+esc(API)+"</b>";}
+ else{$("homeNotice").innerHTML="<b>Catatan:</b> Mode demo — backend AI belum disambungkan, jadi data tidak dikirim ke server. Ini <b>bukan alat diagnosis</b>.";
+  $("screenPrivacy").textContent="Teks, transkrip, dan video diikat pada prompt yang sama sebagai satu sesi multimodal. Pada mode demo, data tidak dikirim ke server.";
+  $("resultNotice").textContent="Backend AI belum disambungkan, jadi belum ada hasil analisis. Tidak ada skor atau diagnosis yang dibuat.";
+  $("apiStatus").innerHTML="Mode demo: backend belum disambungkan. Buka website dengan <code>?api=https://alamat-backend</code>.";
+  $("analyzeBtn").disabled=true;}
+}
+setNotices();
+async function analyze(){
+ if(!API)return;
+ const fd=new FormData();answers.forEach(a=>fd.append("answers",a||""));
+ const csv=$("ofCsv").files[0];
+ if(csv)fd.append("openface_csv",csv);else recorded.forEach((c,i)=>{if(c)fd.append("videos",c.blob,`prompt${i+1}.webm`)});
+ $("analyzeBtn").disabled=true;$("aiResult").innerHTML='<p class="small">Menganalisis… (permintaan pertama bisa memakan waktu karena model sedang dimuat)</p>';
+ try{const r=await fetch(API+"/v1/screen/session",{method:"POST",body:fd});let b;try{b=await r.json()}catch(e){b={}}
+  if(!r.ok)throw new Error(typeof b.detail==="string"?b.detail:("HTTP "+r.status));renderAI(b)}
+ catch(e){$("aiResult").innerHTML=`<p class="err">Gagal menganalisis: ${esc(e.message)}. Pastikan backend menyala dan alamatnya benar.</p>`}
+ finally{$("analyzeBtn").disabled=false}
+}
+function scoreBlock(title,r,extra){
+ if(!r)return "";
+ const flag=r.screening_flag?'<span class="tag warn">Pola menonjol</span>':'<span class="tag">Pola tidak menonjol</span>';
+ return `<div class="card"><h3>${esc(title)}</h3><div class="score"><span class="val">${pct(r.probability)}</span><span class="small">skor skrining (ambang ${pct(r.threshold)})</span></div>
+ <div class="bar"><div style="width:${Math.round((r.probability||0)*100)}%"></div></div>${flag}<p class="small">${esc(r.interpretation)}</p>${extra||""}</div>`;
+}
+function renderAI(b){
+ let html="";
+ if(b.safety&&b.safety.triggered){const h=b.safety.help_resources||{};const list=(h.resources||[]).map(x=>`<li><b>${esc(x.name)}</b> — ${esc(x.contact)}</li>`).join("");
+  html+=`<div class="safetybox"><h3>Terima kasih sudah jujur bercerita</h3><p>Sepertinya ada saat-saat kamu memikirkan kematian atau menyakiti diri. Kamu layak mendapat dukungan. Kalau bisa, bicarakan hari ini dengan orang yang kamu percaya atau layanan bantuan.</p>${list?`<ul>${list}</ul>`:`<p>${esc(h.fallback_text||"")}</p>`}<button class="btn alt" onclick="go('support')">Lihat dukungan →</button></div>`;}
+ const L=b.linguistic,V=b.visual,F=(b.fusion||{}).heuristic;
+ const words=L?((b.per_prompt||[]).flatMap(p=>(p.explanation?.top_increasing||[]).slice(0,3).map(w=>w.word))):[];
+ html+='<div class="aigrid">';
+ html+=L?scoreBlock("Bahasa (teks / voice-to-text)",L,`<p class="small">${L.n_prompts_scored} jawaban dianalisis${words.length?" · kata yang paling memengaruhi skor:":""}</p><div class="chips">${[...new Set(words)].slice(0,8).map(w=>`<span>${esc(w)}</span>`).join("")}</div>`)
+   :`<div class="card"><h3>Bahasa</h3><p class="small">Belum ada jawaban yang cukup panjang (minimal 5 kata) untuk dianalisis.</p></div>`;
+ html+=V?scoreBlock("Ekspresi & perilaku wajah",V,`<div class="chips">${(V.explanation?.top_families||[]).slice(0,3).map(f=>`<span>${esc(f.label)}</span>`).join("")}</div>`)
+   :`<div class="card"><h3>Ekspresi & perilaku wajah</h3><p class="small">${esc(b.visual_note||(V&&V.quality&&V.quality.issues.join("; "))||"Tidak dianalisis.")}</p></div>`;
+ if(F)html+=`<div class="card"><h3>Gabungan sederhana</h3><div class="score"><span class="val">${pct(F.probability)}</span><span class="small">rata-rata ${esc(F.modalities_used.join(" + "))}</span></div><div class="bar"><div style="width:${Math.round(F.probability*100)}%"></div></div><span class="tag warn">Heuristik — belum divalidasi</span><p class="small">Model fusion terlatih belum tersedia. Angka ini hanya rata-rata skor modality di atas.</p></div>`;
+ html+="</div>";
+ const per=(b.per_prompt||[]).filter(p=>p.answered).map(p=>`<div class="card"><b>Prompt ${p.prompt}: ${esc(questions[p.prompt-1]?.title||"")}</b><br><span class="small">${p.probability==null?esc((p.quality?.issues||[]).join("; ")):"skor "+pct(p.probability)}</span></div>`).join("");
+ if(per)html+=`<details style="margin-top:12px"><summary class="small">Rincian per prompt</summary><div class="prompts">${per}</div></details>`;
+ const m=L?.model||V?.model;
+ html+=`<p class="notice" style="margin-top:14px">${esc(b.disclaimer)}${m?`<br><span class="small">Status model: ${esc(m.validation_status)}</span>`:""}</p>`;
+ $("aiResult").innerHTML=html;
+}
+
+function restart(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}qi=0;answers=Array(questions.length).fill("");recorded=Array(questions.length).fill(null);$("clips").innerHTML="";$("liveVideo").srcObject=null;$("cameraPlaceholder").style.display="grid";$("recordBtn").disabled=true;$("aiResult").innerHTML="";$("ofCsv").value="";go("home")}
+</script></body></html>

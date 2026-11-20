@@ -40,7 +40,9 @@ app = FastAPI(
     description="Skrining awal pola gejala depresi (BUKAN diagnosis). Modality visual (fitur OpenFace) dan "
                 "linguistik (teks Bahasa Indonesia). Fusion berstatus NOT_TRAINED.",
 )
-origins = [o.strip() for o in os.environ.get("FENOMIND_ALLOWED_ORIGINS", "http://localhost:3000").split(",") if o.strip()]
+# Bawaan: website FENOMIND di Netlify + pengembangan lokal. Ganti lewat FENOMIND_ALLOWED_ORIGINS.
+DEFAULT_ORIGINS = "https://resonant-crumble-c5770f.netlify.app,http://localhost:3000,http://127.0.0.1:5500,http://localhost:8080"
+origins = [o.strip() for o in os.environ.get("FENOMIND_ALLOWED_ORIGINS", DEFAULT_ORIGINS).split(",") if o.strip()]
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET", "POST"], allow_headers=["*"])
 
 
@@ -98,30 +100,73 @@ async def screen_visual(openface_csv: UploadFile = File(..., description="CSV ke
     return _guard(inf.screen_openface, _parse_openface(data))
 
 
-@app.post("/v1/screen/visual/video")
-async def screen_visual_video(video: UploadFile = File(...)):
-    """Menjalankan OpenFace di server. Butuh FENOMIND_OPENFACE_BIN; tanpa itu mengembalikan 501."""
+OPENFACE_MISSING = ("Analisis visual dari video membutuhkan OpenFace di server (FENOMIND_OPENFACE_BIN) dan "
+                    "belum dipasang. Kirim CSV OpenFace sebagai gantinya.")
+
+
+def openface_binary() -> str | None:
     binary = os.environ.get("FENOMIND_OPENFACE_BIN")
-    if not binary or not Path(binary).exists():
-        raise HTTPException(501, "OpenFace belum dikonfigurasi di server (FENOMIND_OPENFACE_BIN). "
-                                 "Kirim CSV OpenFace ke /v1/screen/visual.")
-    data = await _read_limited(video)
+    return binary if binary and Path(binary).exists() else None
+
+
+def run_openface(data: bytes, suffix: str = ".webm") -> pd.DataFrame:
+    """Ekstrak fitur OpenFace dari video. Video dan CSV mentah SELALU dihapus (finally)."""
+    binary = openface_binary()
+    if binary is None:
+        raise HTTPException(501, OPENFACE_MISSING)
     tmp = Path(tempfile.mkdtemp(prefix="fenomind_"))
     try:
-        src = tmp / "input.mp4"
+        src = tmp / f"input{suffix}"
         src.write_bytes(data)
-        del data
         subprocess.run([binary, "-f", str(src), "-out_dir", str(tmp), "-2Dfp", "-pose", "-aus", "-gaze", "-q"],
                        check=True, timeout=1800, capture_output=True)
         csvs = list(tmp.glob("*.csv"))
         if not csvs:
             raise HTTPException(422, "OpenFace tidak menghasilkan fitur untuk video ini.")
-        frames = read_openface_csv(csvs[0])
-        return _guard(inf.screen_openface, frames)
+        return read_openface_csv(csvs[0])
     except subprocess.CalledProcessError:
         raise HTTPException(422, "OpenFace gagal memproses video.") from None
     finally:
-        shutil.rmtree(tmp, ignore_errors=True)  # video dan fitur mentah selalu dihapus
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
+@app.post("/v1/screen/visual/video")
+async def screen_visual_video(video: UploadFile = File(...)):
+    """Menjalankan OpenFace di server. Butuh FENOMIND_OPENFACE_BIN; tanpa itu mengembalikan 501."""
+    if openface_binary() is None:
+        raise HTTPException(501, OPENFACE_MISSING)
+    frames = run_openface(await _read_limited(video), Path(video.filename or "v.webm").suffix or ".webm")
+    return _guard(inf.screen_openface, frames)
+
+
+@app.post("/v1/screen/session")
+async def screen_session(
+    answers: list[str] = Form(default_factory=list, description="Jawaban per prompt, berurutan (boleh kosong)"),
+    openface_csv: UploadFile | None = File(None, description="Opsional: CSV OpenFace untuk modality visual"),
+    videos: list[UploadFile] | None = File(None, description="Opsional: video per prompt (butuh OpenFace di server)"),
+):
+    """Satu sesi interview website FENOMIND (beberapa prompt sekaligus).
+
+    Linguistik dihitung per jawaban lalu dirangkum; visual dari CSV OpenFace atau video (bila OpenFace
+    terpasang); fusion = heuristik rata-rata (belum divalidasi). Tidak ada yang disimpan.
+    """
+    if len(answers) > 20 or any(len(a) > 5000 for a in answers):
+        raise HTTPException(422, "Maksimal 20 jawaban, masing-masing ≤ 5000 karakter.")
+    frames, note = None, None
+    if openface_csv is not None:
+        frames = _parse_openface(await _read_limited(openface_csv))
+    elif videos:
+        if openface_binary() is None:
+            note = OPENFACE_MISSING
+        else:
+            clips = [run_openface(await _read_limited(v), Path(v.filename or "v.webm").suffix or ".webm")
+                     for v in videos]
+            frames = inf.concat_sessions(clips)
+    else:
+        note = "Tidak ada input visual pada sesi ini."
+    if not any(a.strip() for a in answers) and frames is None:
+        raise HTTPException(422, "Sesi kosong: isi minimal satu jawaban atau kirim input visual.")
+    return _guard(inf.screen_session, answers, frames, note)
 
 
 @app.post("/v1/screen/multimodal")

@@ -1,5 +1,7 @@
 # Integrasi dengan website FENOMIND
 
+> Versi website yang sudah tersambung: [`website/index.html`](../website/index.html); cara deploy di [`website/README.md`](../website/README.md).
+
 Backend ini **tidak** mengubah frontend. Website yang sudah ada cukup memanggil endpoint HTTP di bawah.
 Spesifikasi lengkap (OpenAPI 3) tersedia saat server berjalan di `/openapi.json`, dan dokumentasi
 interaktif di `/docs`. Salinan statisnya ada di `docs/openapi.json`.
@@ -34,6 +36,7 @@ data pribadi spesifik (UU 27/2022 Pasal 4).
 | POST | `/v1/screen/text` | JSON `{text}` (≤ 5.000 karakter) | hasil linguistik |
 | POST | `/v1/screen/visual` | multipart `openface_csv` (CSV OpenFace 2.0) | hasil visual |
 | POST | `/v1/screen/visual/video` | multipart `video` | hasil visual (butuh OpenFace di server) |
+| POST | `/v1/screen/session` | multipart: `answers` (berulang, satu per prompt), `openface_csv?`, `videos?` (berulang) | hasil per prompt + rangkuman linguistik + visual + gabungan heuristik + keselamatan (dipakai `website/index.html`) |
 | POST | `/v1/screen/multimodal` | multipart: `text?`, `openface_csv?`, `participant_id?`, `session_id?` | hasil per modality + blok fusion |
 
 ### Bentuk hasil per modality

@@ -148,6 +148,42 @@
     }
    }
   },
+  "/v1/screen/session": {
+   "post": {
+    "summary": "Screen Session",
+    "description": "Satu sesi interview website FENOMIND (beberapa prompt sekaligus).\n\nLinguistik dihitung per jawaban lalu dirangkum; visual dari CSV OpenFace atau video (bila OpenFace\nterpasang); fusion = heuristik rata-rata (belum divalidasi). Tidak ada yang disimpan.",
+    "operationId": "screen_session_v1_screen_session_post",
+    "requestBody": {
+     "content": {
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/Body_screen_session_v1_screen_session_post"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/v1/screen/multimodal": {
    "post": {
     "summary": "Screen Multimodal",
@@ -238,6 +274,49 @@
     },
     "type": "object",
     "title": "Body_screen_multimodal_v1_screen_multimodal_post"
+   },
+   "Body_screen_session_v1_screen_session_post": {
+    "properties": {
+     "answers": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Answers",
+      "description": "Jawaban per prompt, berurutan (boleh kosong)"
+     },
+     "openface_csv": {
+      "anyOf": [
+       {
+        "type": "string",
+        "contentMediaType": "application/octet-stream"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Openface Csv",
+      "description": "Opsional: CSV OpenFace untuk modality visual"
+     },
+     "videos": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string",
+         "contentMediaType": "application/octet-stream"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Videos",
+      "description": "Opsional: video per prompt (butuh OpenFace di server)"
+     }
+    },
+    "type": "object",
+    "title": "Body_screen_session_v1_screen_session_post"
    },
    "Body_screen_visual_v1_screen_visual_post": {
     "properties": {

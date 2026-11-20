@@ -125,3 +125,52 @@ def test_demo_examples_are_valid_openface_csv():
         with open(f, "rb") as fh:
             b = client.post("/v1/screen/visual", files={"openface_csv": (f.name, fh, "text/csv")}).json()
         assert b["quality"]["ok"] and 0 <= b["probability"] <= 1, f.name
+
+
+@pytest.mark.skipif(not HAS_TEXT, reason="model teks belum dilatih")
+def test_session_text_only_like_website():
+    answers = ["akhir akhir ini aku merasa capek dan tidak semangat kuliah setiap hari",
+               "", "aku jarang tidur nyenyak dan susah fokus belajar", "biasanya aku cerita ke teman dekat"]
+    r = client.post("/v1/screen/session", data={"answers": answers},
+                    headers={"Origin": "https://resonant-crumble-c5770f.netlify.app"})
+    assert r.status_code == 200
+    assert r.headers["access-control-allow-origin"] == "https://resonant-crumble-c5770f.netlify.app"
+    b = r.json()
+    assert [p["answered"] for p in b["per_prompt"]] == [True, False, True, True]
+    scored = [p["probability"] for p in b["per_prompt"] if p.get("probability") is not None]
+    assert b["linguistic"]["n_prompts_scored"] == len(scored)
+    assert b["linguistic"]["probability"] == pytest.approx(sum(scored) / len(scored), abs=1e-3)
+    assert b["visual"] is None and "Tidak ada input visual" in b["visual_note"]
+    assert b["fusion"]["heuristic"]["modalities_used"] == ["linguistic"]
+    assert _no_diagnostic_language(b)
+
+
+@pytest.mark.skipif(not HAS_TEXT, reason="model teks belum dilatih")
+def test_session_safety_in_any_answer_and_video_without_openface(monkeypatch):
+    monkeypatch.delenv("FENOMIND_OPENFACE_BIN", raising=False)
+    r = client.post("/v1/screen/session",
+                    data={"answers": ["hari ini biasa saja seperti hari hari lain", "kadang aku pengen mati aja rasanya"]},
+                    files=[("videos", ("p1.webm", b"0000", "video/webm"))])
+    b = r.json()
+    assert b["safety"]["triggered"] is True and "help_resources" in b["safety"]
+    assert b["visual"] is None and "OpenFace" in b["visual_note"]
+
+
+@pytest.mark.skipif(not (HAS_TEXT and HAS_VISUAL), reason="model belum dilatih")
+def test_session_with_openface_csv_and_validation():
+    with open(ROOT / "examples/lmvd_664_label0.csv", "rb") as f:
+        b = client.post("/v1/screen/session", data={"answers": ["aku senang bisa jalan jalan sama teman teman ke pantai"]},
+                        files={"openface_csv": ("of.csv", f, "text/csv")}).json()
+    assert b["visual"]["probability"] is not None
+    assert b["fusion"]["heuristic"]["modalities_used"] == ["linguistic", "visual"]
+    assert client.post("/v1/screen/session", data={"answers": ["", " "]}).status_code == 422
+    assert client.post("/v1/screen/session", data={"answers": ["x" * 5001]}).status_code == 422
+
+
+def test_concat_sessions_offsets_timestamps():
+    from fenomind.api.inference import concat_sessions
+    a, b = make_openface(n=60), make_openface(n=30)
+    c = concat_sessions([a, b])
+    assert len(c) == 90 and c["timestamp"].is_monotonic_increasing
+    assert c["timestamp"].iloc[60] == pytest.approx(a["timestamp"].max() - a["timestamp"].min() + 1.0)
+    assert concat_sessions([]) is None

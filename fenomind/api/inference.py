@@ -210,6 +210,71 @@ def fusion_block(visual: dict | None = None, linguistic: dict | None = None) -> 
                     "Lihat 'heuristic' untuk gabungan sederhana yang belum divalidasi."}
 
 
+def concat_sessions(frames_list: list[pd.DataFrame]) -> pd.DataFrame | None:
+    """Gabungkan beberapa rekaman (mis. satu video per prompt) jadi satu sesi dengan timestamp bersambung.
+    Jeda 1 detik disisipkan agar kecepatan perubahan tidak dihitung melintasi batas klip."""
+    frames_list = [f for f in frames_list if f is not None and len(f)]
+    if not frames_list:
+        return None
+    out, offset = [], 0.0
+    for f in frames_list:
+        f = f.copy()
+        t0 = float(f["timestamp"].min())
+        f["timestamp"] = f["timestamp"] - t0 + offset
+        offset = float(f["timestamp"].max()) + 1.0
+        out.append(f)
+    return pd.concat(out, ignore_index=True)
+
+
+def screen_session(answers: list[str], frames: pd.DataFrame | None = None, visual_note: str | None = None) -> dict:
+    """Satu sesi interview multi-prompt (seperti di website FENOMIND).
+
+    - Linguistik: setiap jawaban diskor terpisah (model dilatih pada teks pendek), lalu
+      dirangkum dengan RATA-RATA probabilitas jawaban yang memenuhi syarat kualitas.
+    - Keselamatan: dipicu bila SALAH SATU jawaban memuat frasa keselamatan.
+    - Visual: semua klip digabung jadi satu sesi (bila ada fitur OpenFace).
+    - Fusion: heuristik rata-rata (belum divalidasi), lihat ``fusion_block``.
+    """
+    per_prompt = []
+    for i, a in enumerate(answers, start=1):
+        if not a or not a.strip():
+            per_prompt.append({"prompt": i, "answered": False})
+            continue
+        r = screen_text(a)
+        per_prompt.append({"prompt": i, "answered": True, **r})
+    scored = [p for p in per_prompt if p.get("probability") is not None]
+    linguistic = None
+    if scored:
+        _, meta = _load("text")
+        prob = float(np.mean([p["probability"] for p in scored]))
+        thr = meta["threshold"]
+        linguistic = {
+            "modality": "linguistic",
+            "aggregation": "rata-rata probabilitas jawaban per prompt yang memenuhi syarat kualitas",
+            "n_prompts_scored": len(scored),
+            "probability": round(prob, 4),
+            "screening_flag": bool(prob >= thr),
+            "threshold": thr,
+            "interpretation": _interpret(prob, thr, "linguistic"),
+            "model": scored[0]["model"],
+        }
+    safety_hit = any(p.get("safety", {}).get("triggered") for p in per_prompt)
+    safety = {"triggered": safety_hit}
+    if safety_hit:
+        safety = next(p["safety"] for p in per_prompt if p.get("safety", {}).get("triggered"))
+    visual = screen_openface(frames) if frames is not None else None
+    return {
+        "linguistic": linguistic,
+        "per_prompt": per_prompt,
+        "visual": visual,
+        "visual_note": visual_note if visual is None else None,
+        "missing_modalities": [k for k, v in (("visual", visual), ("linguistic", linguistic)) if v is None],
+        "fusion": fusion_block(visual, linguistic),
+        "safety": safety,
+        "disclaimer": DISCLAIMER,
+    }
+
+
 def models_status() -> dict:
     out = {}
     for mod in ("visual", "text"):

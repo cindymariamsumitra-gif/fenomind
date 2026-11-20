@@ -20,6 +20,7 @@ Repo ini hanya berisi AI dan API. Website FENOMIND yang sudah ada tetap dipakai 
 | Gabungan untuk tampilan | ⚠️ heuristik (rata-rata), belum divalidasi | `fusion.heuristic` di respons API |
 | Explainability | ✅ | oklusi per kelompok fitur/kata + importance global |
 | Inference API | ✅ | FastAPI, OpenAPI, CORS, tanpa penyimpanan |
+| Website tersambung | ✅ | [`website/`](website/README.md): Session Overview menampilkan hasil AI; alamat backend lewat `?api=` |
 | Validasi pada mahasiswa Indonesia | ❌ belum | syarat sebelum dipakai sungguhan |
 
 Angka performa lengkap ada di [`docs/RESULTS.md`](docs/RESULTS.md), yang dihasilkan otomatis dari artefak eksperimen.

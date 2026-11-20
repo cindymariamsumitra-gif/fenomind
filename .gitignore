@@ -15,4 +15,4 @@ artifacts/*.log
 artifacts/text/indobert/checkpoints/
 artifacts/text/indobert/*.pt
 *.tmp
-artifacts/text/indobert/final/
+artifacts/text/indobert/final
