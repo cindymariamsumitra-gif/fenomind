@@ -62,6 +62,12 @@ data pribadi spesifik (UU 27/2022 Pasal 4).
 
 Nilai contoh di atas hanya ilustrasi bentuk, bukan hasil model.
 
+Setiap hasil memuat `classification` ({`code`: `indicated` | `not_indicated` | `unknown`, `label`}), dengan
+label **"Terindikasi pola gejala depresi"** atau **"Tidak terindikasi pola gejala depresi"** (bahasa skrining,
+bukan diagnosis). `/v1/screen/session` juga mengembalikan `summary`: `headline`, `label`, `probability`, `basis`,
+`note`, `next_steps`, dan `disclaimer`, untuk ditampilkan paling atas di halaman hasil (setelah layar keselamatan
+bila `safety.triggered`).
+
 Aturan yang wajib diikuti frontend:
 
 1. **`probability: null`** artinya kualitas input tidak memenuhi syarat. Tampilkan `quality.issues`, jangan tampilkan skor.

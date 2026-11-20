@@ -183,3 +183,36 @@ def test_cors_allows_any_netlify_subdomain_only():
     assert "access-control-allow-origin" not in bad.headers
     trick = client.get("/v1/health", headers={"Origin": "https://evil.netlify.app.example.com"})
     assert "access-control-allow-origin" not in trick.headers
+
+
+def test_classify_labels():
+    from fenomind.api.inference import LABEL_NEGATIVE, LABEL_POSITIVE, classify
+    assert classify(0.7, 0.5) == {"code": "indicated", "label": LABEL_POSITIVE}
+    assert classify(0.5, 0.5)["code"] == "indicated"
+    assert classify(0.2, 0.5) == {"code": "not_indicated", "label": LABEL_NEGATIVE}
+    assert classify(None, 0.5)["code"] == "unknown"
+
+
+@pytest.mark.skipif(not HAS_TEXT, reason="model teks belum dilatih")
+def test_session_summary_has_classification_sentence():
+    neg = client.post("/v1/screen/session", data={"answers": [
+        "suasana hatiku cukup baik dan aku senang bisa menyelesaikan proyek bersama teman",
+        "aku masih rutin olahraga sore dan ikut kegiatan himpunan dengan semangat"]}).json()
+    s = neg["summary"]
+    assert s["headline"].startswith("Hasil skrining: ")
+    assert s["code"] == neg["linguistic"]["classification"]["code"]
+    assert s["label"] in s["headline"] and s["next_steps"] and s["basis"] == "bahasa"
+    expected = "indicated" if neg["linguistic"]["probability"] >= 0.5 else "not_indicated"
+    assert s["code"] == expected
+    assert _no_diagnostic_language(neg)
+
+
+def test_session_summary_note_when_one_modality_flagged():
+    from fenomind.api.inference import fusion_block, session_summary
+    lin = {"probability": 0.10, "screening_flag": False}
+    vis = {"probability": 0.70, "screening_flag": True}
+    s = session_summary(lin, vis, fusion_block(vis, lin), {"triggered": False})
+    assert s["code"] == "not_indicated" and "perilaku wajah" in s["note"]
+    assert s["basis"] == "gabungan heuristik bahasa + wajah"
+    empty = session_summary(None, None, fusion_block(None, None), {"triggered": True})
+    assert empty["code"] == "unknown" and empty["safety_priority"] is True

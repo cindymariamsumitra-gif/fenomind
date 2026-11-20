@@ -119,6 +119,35 @@ def _interpret(prob: float | None, threshold: float, modality: str) -> str:
             "Ini tidak menjamin tidak ada masalah; bila kamu merasa tidak baik-baik saja, tetap cari bantuan.")
 
 
+LABEL_POSITIVE = "Terindikasi pola gejala depresi"
+LABEL_NEGATIVE = "Tidak terindikasi pola gejala depresi"
+LABEL_UNKNOWN = "Belum dapat diklasifikasikan"
+
+
+def classify(prob: float | None, threshold: float) -> dict:
+    """Label klasifikasi skrining (bukan diagnosis) dari probabilitas dan ambang."""
+    if prob is None:
+        return {"code": "unknown", "label": LABEL_UNKNOWN}
+    if prob >= threshold:
+        return {"code": "indicated", "label": LABEL_POSITIVE}
+    return {"code": "not_indicated", "label": LABEL_NEGATIVE}
+
+
+NEXT_STEPS = {
+    "indicated": [
+        "Bicarakan apa yang kamu rasakan dengan orang yang kamu percaya.",
+        "Pertimbangkan menghubungi layanan konseling kampus atau psikolog untuk penilaian yang sebenarnya.",
+        "Hasil ini bukan diagnosis; hanya profesional yang dapat menilai kondisimu.",
+    ],
+    "not_indicated": [
+        "Tetap jaga rutinitas, tidur, dan hubungan dengan orang-orang terdekat.",
+        "Bila suatu saat kamu merasa tidak baik-baik saja, jangan ragu mencari bantuan.",
+        "Hasil ini tidak menjamin tidak ada masalah; skrining hanya melihat sebagian kecil dirimu.",
+    ],
+    "unknown": ["Lengkapi jawaban (minimal 5 kata) atau input visual agar skrining dapat dilakukan."],
+}
+
+
 def screen_text(text: str) -> dict:
     model, meta = _load("text")
     clean = clean_text(text)
@@ -136,6 +165,7 @@ def screen_text(text: str) -> dict:
         "probability": prob,
         "screening_flag": None if prob is None else bool(prob >= thr),
         "threshold": thr,
+        "classification": classify(prob, thr),
         "interpretation": _interpret(prob, thr, "linguistic"),
         "quality": {"ok": not issues, "issues": issues, "n_words": n_words},
         "explanation": expl,
@@ -167,6 +197,7 @@ def screen_openface(frames: pd.DataFrame) -> dict:
         "probability": prob,
         "screening_flag": None if prob is None else bool(prob >= thr),
         "threshold": thr,
+        "classification": classify(prob, thr),
         "interpretation": _interpret(prob, thr, "visual"),
         "quality": {"ok": not issues, "issues": issues,
                     "valid_frame_ratio": round(feats["q_valid_ratio"], 3),
@@ -198,6 +229,7 @@ def fusion_block(visual: dict | None = None, linguistic: dict | None = None) -> 
             "method": "rata-rata probabilitas modality yang tersedia (tanpa bobot terlatih)",
             "probability": round(p, 4),
             "screening_flag": bool(p >= HEURISTIC_THRESHOLD),
+            "classification": classify(p, HEURISTIC_THRESHOLD),
             "threshold": HEURISTIC_THRESHOLD,
             "modalities_used": sorted(probs),
             "any_modality_flagged": any(v >= HEURISTIC_THRESHOLD for v in probs.values()),
@@ -255,6 +287,7 @@ def screen_session(answers: list[str], frames: pd.DataFrame | None = None, visua
             "probability": round(prob, 4),
             "screening_flag": bool(prob >= thr),
             "threshold": thr,
+            "classification": classify(prob, thr),
             "interpretation": _interpret(prob, thr, "linguistic"),
             "model": scored[0]["model"],
         }
@@ -263,15 +296,49 @@ def screen_session(answers: list[str], frames: pd.DataFrame | None = None, visua
     if safety_hit:
         safety = next(p["safety"] for p in per_prompt if p.get("safety", {}).get("triggered"))
     visual = screen_openface(frames) if frames is not None else None
+    fusion = fusion_block(visual, linguistic)
     return {
+        "summary": session_summary(linguistic, visual, fusion, safety),
         "linguistic": linguistic,
         "per_prompt": per_prompt,
         "visual": visual,
         "visual_note": visual_note if visual is None else None,
         "missing_modalities": [k for k, v in (("visual", visual), ("linguistic", linguistic)) if v is None],
-        "fusion": fusion_block(visual, linguistic),
+        "fusion": fusion,
         "safety": safety,
         "disclaimer": DISCLAIMER,
+    }
+
+
+def session_summary(linguistic: dict | None, visual: dict | None, fusion: dict, safety: dict) -> dict:
+    """Satu kalimat klasifikasi untuk seluruh sesi.
+
+    Dasar: skor gabungan heuristik (rata-rata modality yang tersedia); bila hanya satu modality,
+    sama dengan skor modality itu. Bila rata-rata di bawah ambang tetapi salah satu modality
+    terindikasi, hal itu dicatat di ``note``.
+    """
+    h = fusion.get("heuristic")
+    if h is None:
+        cls = classify(None, HEURISTIC_THRESHOLD)
+        basis = None
+    else:
+        cls = h["classification"]
+        basis = ("gabungan heuristik bahasa + wajah" if len(h["modalities_used"]) > 1
+                 else {"linguistic": "bahasa", "visual": "perilaku wajah"}[h["modalities_used"][0]])
+    flagged = [name for name, r in (("bahasa", linguistic), ("perilaku wajah", visual))
+               if r and r.get("screening_flag")]
+    note = None
+    if cls["code"] == "not_indicated" and flagged:
+        note = f"Catatan: hasil {' dan '.join(flagged)} secara terpisah terindikasi. Pertimbangkan tetap mencari dukungan."
+    return {
+        **cls,
+        "headline": f"Hasil skrining: {cls['label']}",
+        "probability": None if h is None else h["probability"],
+        "basis": basis,
+        "note": note,
+        "next_steps": NEXT_STEPS[cls["code"]],
+        "safety_priority": bool(safety.get("triggered")),
+        "disclaimer": "Ini hasil skrining awal, bukan diagnosis.",
     }
 
 
