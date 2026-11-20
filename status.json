@@ -1,0 +1,7 @@
+{
+  "status": "NOT_TRAINED",
+  "validated": false,
+  "reason": "Belum ada dataset berpasangan (rekaman wajah + teks dari partisipan dan sesi yang sama) berlabel depresi. LMVD tidak memuat teks; DatasetIndikasiDepresi tidak memuat video.",
+  "architectures_implemented": ["LateFusion (stacking logit + indikator missing modality)", "FeatureLevelFusion (fitur visual + PCA embedding teks + indikator missing)"],
+  "experiment": "notebooks/fusion_experiment.ipynb, fenomind/fusion/experiment.py"
+}

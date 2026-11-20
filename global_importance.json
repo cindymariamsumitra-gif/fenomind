@@ -1,0 +1,247 @@
+{
+  "method": "koefisien regresi logistik untuk fitur kata (TF-IDF unigram/bigram); fitur karakter tidak ditampilkan",
+  "toward_indicated": [
+    {
+      "term": "pernah ada",
+      "coef": 1.352
+    },
+    {
+      "term": "pernah bisa",
+      "coef": 1.169
+    },
+    {
+      "term": "sedih",
+      "coef": 1.127
+    },
+    {
+      "term": "aku yang",
+      "coef": 1.124
+    },
+    {
+      "term": "apa aku",
+      "coef": 1.107
+    },
+    {
+      "term": "aku pernah",
+      "coef": 1.075
+    },
+    {
+      "term": "namun",
+      "coef": 1.071
+    },
+    {
+      "term": "diri",
+      "coef": 1.003
+    },
+    {
+      "term": "sedangkan",
+      "coef": 0.97
+    },
+    {
+      "term": "pernah tidak",
+      "coef": 0.967
+    },
+    {
+      "term": "pernah mau",
+      "coef": 0.959
+    },
+    {
+      "term": "aku",
+      "coef": 0.956
+    },
+    {
+      "term": "takut",
+      "coef": 0.943
+    },
+    {
+      "term": "rindu",
+      "coef": 0.925
+    },
+    {
+      "term": "tapi kenapa",
+      "coef": 0.882
+    },
+    {
+      "term": "apa",
+      "coef": 0.84
+    },
+    {
+      "term": "pernah tau",
+      "coef": 0.809
+    },
+    {
+      "term": "tidak bisa",
+      "coef": 0.806
+    },
+    {
+      "term": "rasanya",
+      "coef": 0.8
+    },
+    {
+      "term": "sakit hati",
+      "coef": 0.799
+    },
+    {
+      "term": "tolong",
+      "coef": 0.794
+    },
+    {
+      "term": "kau",
+      "coef": 0.784
+    },
+    {
+      "term": "harapan",
+      "coef": 0.774
+    },
+    {
+      "term": "kenapa",
+      "coef": 0.764
+    },
+    {
+      "term": "suka sama",
+      "coef": 0.757
+    },
+    {
+      "term": "berada",
+      "coef": 0.746
+    },
+    {
+      "term": "lagi",
+      "coef": 0.736
+    },
+    {
+      "term": "tiba",
+      "coef": 0.723
+    },
+    {
+      "term": "kini",
+      "coef": 0.722
+    },
+    {
+      "term": "kesalahan",
+      "coef": 0.722
+    }
+  ],
+  "toward_not_indicated": [
+    {
+      "term": "terimakasih",
+      "coef": -1.201
+    },
+    {
+      "term": "pernah menyesal",
+      "coef": -1.021
+    },
+    {
+      "term": "dan",
+      "coef": -0.961
+    },
+    {
+      "term": "allah",
+      "coef": -0.955
+    },
+    {
+      "term": "dan tidak",
+      "coef": -0.937
+    },
+    {
+      "term": "beli",
+      "coef": -0.927
+    },
+    {
+      "term": "jangan",
+      "coef": -0.913
+    },
+    {
+      "term": "kasih",
+      "coef": -0.889
+    },
+    {
+      "term": "perlu",
+      "coef": -0.879
+    },
+    {
+      "term": "tapi aku",
+      "coef": -0.866
+    },
+    {
+      "term": "itu",
+      "coef": -0.847
+    },
+    {
+      "term": "dari",
+      "coef": -0.811
+    },
+    {
+      "term": "bangga",
+      "coef": -0.783
+    },
+    {
+      "term": "pernah menyesali",
+      "coef": -0.77
+    },
+    {
+      "term": "alhamdulillah",
+      "coef": -0.758
+    },
+    {
+      "term": "ayah",
+      "coef": -0.742
+    },
+    {
+      "term": "ikhlas",
+      "coef": -0.722
+    },
+    {
+      "term": "org yang",
+      "coef": -0.716
+    },
+    {
+      "term": "yakin",
+      "coef": -0.712
+    },
+    {
+      "term": "pernah bilang",
+      "coef": -0.698
+    },
+    {
+      "term": "kenal",
+      "coef": -0.682
+    },
+    {
+      "term": "jangan pernah",
+      "coef": -0.673
+    },
+    {
+      "term": "kepada",
+      "coef": -0.67
+    },
+    {
+      "term": "berhenti",
+      "coef": -0.669
+    },
+    {
+      "term": "pasti",
+      "coef": -0.655
+    },
+    {
+      "term": "berarti",
+      "coef": -0.653
+    },
+    {
+      "term": "doa",
+      "coef": -0.652
+    },
+    {
+      "term": "but",
+      "coef": -0.649
+    },
+    {
+      "term": "jawab",
+      "coef": -0.648
+    },
+    {
+      "term": "lebih baik",
+      "coef": -0.644
+    }
+  ]
+}

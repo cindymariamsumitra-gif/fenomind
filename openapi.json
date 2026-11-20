@@ -1,0 +1,342 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "FENOMIND Inference API",
+  "description": "Skrining awal pola gejala depresi (BUKAN diagnosis). Modality visual (fitur OpenFace) dan linguistik (teks Bahasa Indonesia). Fusion berstatus NOT_TRAINED.",
+  "version": "0.1.0"
+ },
+ "paths": {
+  "/v1/health": {
+   "get": {
+    "summary": "Health",
+    "operationId": "health_v1_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/models": {
+   "get": {
+    "summary": "Models",
+    "description": "Status model, metrik validasi silang, dan status fusion.",
+    "operationId": "models_v1_models_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/screen/text": {
+   "post": {
+    "summary": "Screen Text",
+    "operationId": "screen_text_v1_screen_text_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TextIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/screen/visual": {
+   "post": {
+    "summary": "Screen Visual",
+    "operationId": "screen_visual_v1_screen_visual_post",
+    "requestBody": {
+     "content": {
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/Body_screen_visual_v1_screen_visual_post"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/screen/visual/video": {
+   "post": {
+    "summary": "Screen Visual Video",
+    "description": "Menjalankan OpenFace di server. Butuh FENOMIND_OPENFACE_BIN; tanpa itu mengembalikan 501.",
+    "operationId": "screen_visual_video_v1_screen_visual_video_post",
+    "requestBody": {
+     "content": {
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/Body_screen_visual_video_v1_screen_visual_video_post"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/screen/multimodal": {
+   "post": {
+    "summary": "Screen Multimodal",
+    "description": "Menjalankan modality yang tersedia. Skor gabungan TIDAK dihitung (fusion NOT_TRAINED).",
+    "operationId": "screen_multimodal_v1_screen_multimodal_post",
+    "requestBody": {
+     "content": {
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/Body_screen_multimodal_v1_screen_multimodal_post"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "Body_screen_multimodal_v1_screen_multimodal_post": {
+    "properties": {
+     "text": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 5000
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text"
+     },
+     "openface_csv": {
+      "anyOf": [
+       {
+        "type": "string",
+        "contentMediaType": "application/octet-stream"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Openface Csv"
+     },
+     "participant_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Participant Id"
+     },
+     "session_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Session Id"
+     }
+    },
+    "type": "object",
+    "title": "Body_screen_multimodal_v1_screen_multimodal_post"
+   },
+   "Body_screen_visual_v1_screen_visual_post": {
+    "properties": {
+     "openface_csv": {
+      "type": "string",
+      "contentMediaType": "application/octet-stream",
+      "title": "Openface Csv",
+      "description": "CSV keluaran OpenFace FeatureExtraction"
+     }
+    },
+    "type": "object",
+    "required": [
+     "openface_csv"
+    ],
+    "title": "Body_screen_visual_v1_screen_visual_post"
+   },
+   "Body_screen_visual_video_v1_screen_visual_video_post": {
+    "properties": {
+     "video": {
+      "type": "string",
+      "contentMediaType": "application/octet-stream",
+      "title": "Video"
+     }
+    },
+    "type": "object",
+    "required": [
+     "video"
+    ],
+    "title": "Body_screen_visual_video_v1_screen_visual_video_post"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "TextIn": {
+    "properties": {
+     "text": {
+      "type": "string",
+      "maxLength": 5000,
+      "minLength": 1,
+      "title": "Text",
+      "description": "Jawaban teks atau hasil voice-to-text"
+     }
+    },
+    "type": "object",
+    "required": [
+     "text"
+    ],
+    "title": "TextIn"
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   }
+  }
+ }
+}

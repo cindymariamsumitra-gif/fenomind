@@ -1,0 +1,54 @@
+{
+  "model": "xgboost",
+  "overall_auc": 0.81,
+  "quality_only_control_auc": 0.712,
+  "by_valid_ratio": [
+    {
+      "range": [
+        0.5,
+        0.9
+      ],
+      "n": 419,
+      "positive_rate": 0.267,
+      "auc": 0.786
+    },
+    {
+      "range": [
+        0.9,
+        0.98
+      ],
+      "n": 365,
+      "positive_rate": 0.532,
+      "auc": 0.749
+    },
+    {
+      "range": [
+        0.98,
+        1.0
+      ],
+      "n": 816,
+      "positive_rate": 0.701,
+      "auc": 0.766
+    }
+  ],
+  "by_fps": [
+    {
+      "fps": 24.0,
+      "n": 67,
+      "positive_rate": 0.448,
+      "auc": 0.688
+    },
+    {
+      "fps": 25.0,
+      "n": 224,
+      "positive_rate": 0.656,
+      "auc": 0.818
+    },
+    {
+      "fps": 30.0,
+      "n": 1133,
+      "positive_rate": 0.553,
+      "auc": 0.828
+    }
+  ]
+}

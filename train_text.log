@@ -1,0 +1,10 @@
+dummy_prior              AUC=0.500 BA=0.500 F1=0.000 (13.9s)
+tfidf_logreg             AUC=0.761 BA=0.694 F1=0.664 (32.5s)
+tfidf_linearsvm          AUC=0.758 BA=0.688 F1=0.638 (30.4s)
+tfidf_complement_nb      AUC=0.745 BA=0.672 F1=0.614 (17.8s)
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3824.57it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+emb_minilm_multi_logreg  AUC=0.776 BA=0.707 F1=0.684 (94.2s)
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3994.94it/s]
+emb_e5_small_multi_logreg AUC=0.750 BA=0.684 F1=0.660 (50.0s)
+tersimpan di /home/user/fenomind-ai/artifacts/text

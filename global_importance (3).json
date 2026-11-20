@@ -1,0 +1,158 @@
+{
+  "model": "xgboost",
+  "method": "permutation importance pada fold uji (CV berbasis grup), penurunan ROC-AUC",
+  "families": [
+    {
+      "family": "au_dynamics",
+      "label": "Kecepatan perubahan action unit",
+      "auc_drop": 0.0412
+    },
+    {
+      "family": "head_pose",
+      "label": "Gerak dan posisi kepala",
+      "auc_drop": 0.0351
+    },
+    {
+      "family": "au_presence",
+      "label": "Frekuensi kemunculan action unit",
+      "auc_drop": 0.0315
+    },
+    {
+      "family": "landmarks",
+      "label": "Bukaan mulut/mata, gerak landmark, kedipan",
+      "auc_drop": 0.0234
+    },
+    {
+      "family": "au_variability",
+      "label": "Variabilitas action unit",
+      "auc_drop": 0.0148
+    },
+    {
+      "family": "au_intensity",
+      "label": "Intensitas action unit (rata-rata, p90)",
+      "auc_drop": 0.0147
+    },
+    {
+      "family": "gaze",
+      "label": "Arah dan gerak pandangan",
+      "auc_drop": 0.0077
+    },
+    {
+      "family": "composites",
+      "label": "Komposit otot (senyum AU6+12, alis AU4/AU1, sudut bibir AU15)",
+      "auc_drop": 0.0027
+    },
+    {
+      "family": "blink",
+      "label": "Laju kedipan",
+      "auc_drop": 0.0007
+    },
+    {
+      "family": "expressivity",
+      "label": "Ekspresivitas keseluruhan",
+      "auc_drop": 0.0002
+    }
+  ],
+  "top_features": [
+    {
+      "feature": "head_translation_std",
+      "auc_drop": 0.0105
+    },
+    {
+      "feature": "au_AU26_vel",
+      "auc_drop": 0.01
+    },
+    {
+      "feature": "gaze_y_mean",
+      "auc_drop": 0.0089
+    },
+    {
+      "feature": "lmk_mouth_open_mean",
+      "auc_drop": 0.0067
+    },
+    {
+      "feature": "lmk_eye_aspect_mean",
+      "auc_drop": 0.0057
+    },
+    {
+      "feature": "auc_AU04_rate",
+      "auc_drop": 0.0053
+    },
+    {
+      "feature": "auc_AU20_rate",
+      "auc_drop": 0.0049
+    },
+    {
+      "feature": "auc_AU26_rate",
+      "auc_drop": 0.0043
+    },
+    {
+      "feature": "au_AU12_std",
+      "auc_drop": 0.0041
+    },
+    {
+      "feature": "lmk_eye_aspect_std",
+      "auc_drop": 0.004
+    },
+    {
+      "feature": "auc_AU12_rate",
+      "auc_drop": 0.0035
+    },
+    {
+      "feature": "auc_AU05_rate",
+      "auc_drop": 0.0033
+    },
+    {
+      "feature": "au_AU17_vel",
+      "auc_drop": 0.0031
+    },
+    {
+      "feature": "head_pose_Ry_std",
+      "auc_drop": 0.0028
+    },
+    {
+      "feature": "au_AU01_std",
+      "auc_drop": 0.0023
+    },
+    {
+      "feature": "comp_smile_AU06_AU12_mean",
+      "auc_drop": 0.0023
+    },
+    {
+      "feature": "lmk_mouth_width_mean",
+      "auc_drop": 0.0022
+    },
+    {
+      "feature": "au_AU20_p90",
+      "auc_drop": 0.0022
+    },
+    {
+      "feature": "au_AU45_mean",
+      "auc_drop": 0.0021
+    },
+    {
+      "feature": "au_AU45_std",
+      "auc_drop": 0.0021
+    },
+    {
+      "feature": "au_AU12_mean",
+      "auc_drop": 0.0018
+    },
+    {
+      "feature": "auc_AU07_rate",
+      "auc_drop": 0.0017
+    },
+    {
+      "feature": "au_AU23_p90",
+      "auc_drop": 0.0017
+    },
+    {
+      "feature": "au_AU14_vel",
+      "auc_drop": 0.0017
+    },
+    {
+      "feature": "au_AU07_vel",
+      "auc_drop": 0.0017
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+# Frasa keselamatan (rancangan 4.4 dan 6). Kecocokan SATU frasa saja langsung
+# memicu Layar Keselamatan. Lebih baik terlalu sensitif daripada terlewat.
+# TODO tim: WAJIB ditinjau psikolog; tambahkan variasi ragam santai.
+# Frasa dicocokkan per kata utuh setelah huruf kecil; "mati lampu" tidak cocok
+# dengan "pengen mati" karena "mati" saja tidak ada di daftar.
+reviewed: false
+phrases:
+  - bunuh diri
+  - membunuh diri
+  - bundir
+  - mengakhiri hidup
+  - akhiri hidup
+  - ngakhirin hidup
+  - ingin mati
+  - pengen mati
+  - pingin mati
+  - mau mati aja
+  - mau mati saja
+  - lebih baik mati
+  - mending mati
+  - mendingan mati
+  - gak mau hidup
+  - nggak mau hidup
+  - tidak mau hidup
+  - gak pengen hidup
+  - nggak pengen hidup
+  - capek hidup
+  - menyakiti diri
+  - nyakitin diri
+  - melukai diri
+  - ngelukain diri
+  - nyilet tangan
+  - menyilet
+  - self harm
+  - selfharm
+  - lompat dari
+  - gantung diri
+  - minum racun
+  - overdosis

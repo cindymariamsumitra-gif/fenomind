@@ -1,0 +1,71 @@
+{
+  "modality": "linguistic",
+  "model": "tfidf_logreg",
+  "params": {
+    "logisticregression__C": "1.0"
+  },
+  "preprocess": "fenomind.text.preprocess.clean_text",
+  "threshold": 0.5,
+  "training_data": "DatasetIndikasiDepresi (Budiman, 2021): tweet Indonesia 2020, label oleh penyusun dataset dengan keterlibatan psikolog; tanpa lisensi eksplisit",
+  "metrics_grouped_cv": {
+    "n": 3853,
+    "positive_rate": 0.44640539839086424,
+    "threshold": 0.5,
+    "accuracy": 0.6960809758629639,
+    "balanced_accuracy": 0.6937586541501761,
+    "precision": 0.655700510493477,
+    "recall_sensitivity": 0.672093023255814,
+    "specificity": 0.7154242850445383,
+    "f1": 0.6637955785242607,
+    "macro_f1": 0.6932522765934115,
+    "roc_auc": 0.7605190854675694,
+    "confusion_matrix": {
+      "tn": 1526,
+      "fp": 607,
+      "fn": 564,
+      "tp": 1156
+    },
+    "ci95": {
+      "roc_auc": [
+        0.7452630638776865,
+        0.7751691168311613
+      ],
+      "balanced_accuracy": [
+        0.6790433249552482,
+        0.7090934140310323
+      ],
+      "f1": [
+        0.6457456123034431,
+        0.6825191930957802
+      ],
+      "recall_sensitivity": [
+        0.6495873755868422,
+        0.6960144884673625
+      ],
+      "specificity": [
+        0.6957630328195307,
+        0.7346955782312925
+      ]
+    },
+    "chosen_params": [
+      {
+        "logisticregression__C": "1.0"
+      },
+      {
+        "logisticregression__C": "1.0"
+      },
+      {
+        "logisticregression__C": "1.0"
+      },
+      {
+        "logisticregression__C": "1.0"
+      },
+      {
+        "logisticregression__C": "1.0"
+      }
+    ],
+    "seconds": 32.5
+  },
+  "validation_status": "VALIDATED_ON_TWEETS_ONLY \u2014 domain tweet, belum divalidasi pada jawaban mahasiswa",
+  "min_words": 5
+}

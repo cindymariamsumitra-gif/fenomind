@@ -1,0 +1,784 @@
+{
+  "dataset": {
+    "n_total": 1805,
+    "n_after_quality_filter": 1600,
+    "positive_rate_total": 0.49806094182825483,
+    "positive_rate_filtered": 0.54875,
+    "n_features": 117,
+    "n_groups": 183,
+    "grouping": "proksi: blok 10 ID berurutan (LMVD tidak menyediakan ID partisipan)",
+    "deduplication": {
+      "conflicting_label_duplicates_removed": 14,
+      "same_label_duplicates_removed": 4
+    }
+  },
+  "protocols": {
+    "grouped_cv": {
+      "dummy_prior": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.54875,
+        "balanced_accuracy": 0.5,
+        "precision": 0.54875,
+        "recall_sensitivity": 1.0,
+        "specificity": 0.0,
+        "f1": 0.70863599677159,
+        "macro_f1": 0.354317998385795,
+        "roc_auc": 0.49610279595403806,
+        "confusion_matrix": {
+          "tn": 0,
+          "fp": 722,
+          "fn": 0,
+          "tp": 878
+        },
+        "ci95": {
+          "roc_auc": [
+            0.4104222360603842,
+            0.5743810043752997
+          ],
+          "balanced_accuracy": [
+            0.5,
+            0.5
+          ],
+          "f1": [
+            0.6474412127334036,
+            0.7642634615782734
+          ],
+          "recall_sensitivity": [
+            1.0,
+            1.0
+          ],
+          "specificity": [
+            0.0,
+            0.0
+          ]
+        },
+        "chosen_params": [],
+        "seconds": 10.4
+      },
+      "logistic_regression": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.709375,
+        "balanced_accuracy": 0.7056628953993904,
+        "precision": 0.7312430011198209,
+        "recall_sensitivity": 0.7437357630979499,
+        "specificity": 0.667590027700831,
+        "f1": 0.7374364765669114,
+        "macro_f1": 0.7060170486403485,
+        "roc_auc": 0.7881343900453688,
+        "confusion_matrix": {
+          "tn": 482,
+          "fp": 240,
+          "fn": 225,
+          "tp": 653
+        },
+        "ci95": {
+          "roc_auc": [
+            0.7584520513240551,
+            0.8148200052542633
+          ],
+          "balanced_accuracy": [
+            0.678094029873083,
+            0.7316844151550728
+          ],
+          "f1": [
+            0.6962979947449082,
+            0.7731380722539125
+          ],
+          "recall_sensitivity": [
+            0.7057387047206108,
+            0.7795193677937556
+          ],
+          "specificity": [
+            0.6223872705956622,
+            0.7064248893085452
+          ]
+        },
+        "chosen_params": [
+          {
+            "logisticregression__C": "0.01"
+          },
+          {
+            "logisticregression__C": "0.01"
+          },
+          {
+            "logisticregression__C": "0.01"
+          },
+          {
+            "logisticregression__C": "0.01"
+          },
+          {
+            "logisticregression__C": "0.1"
+          }
+        ],
+        "seconds": 13.6
+      },
+      "svm_rbf": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.719375,
+        "balanced_accuracy": 0.71317493169442,
+        "precision": 0.7294117647058823,
+        "recall_sensitivity": 0.7767653758542141,
+        "specificity": 0.649584487534626,
+        "f1": 0.7523441809156095,
+        "macro_f1": 0.7143119606813086,
+        "roc_auc": 0.7990238454306249,
+        "confusion_matrix": {
+          "tn": 469,
+          "fp": 253,
+          "fn": 196,
+          "tp": 682
+        },
+        "ci95": {
+          "roc_auc": [
+            0.7682210922306403,
+            0.8243597004835923
+          ],
+          "balanced_accuracy": [
+            0.6849850154990506,
+            0.7391068353759644
+          ],
+          "f1": [
+            0.7076628810520025,
+            0.7868218270678066
+          ],
+          "recall_sensitivity": [
+            0.7388678366863238,
+            0.8118736819683934
+          ],
+          "specificity": [
+            0.6081749200537303,
+            0.6903350737616956
+          ]
+        },
+        "chosen_params": [
+          {
+            "svc__C": "1.0",
+            "svc__gamma": "scale"
+          },
+          {
+            "svc__C": "3.0",
+            "svc__gamma": "scale"
+          },
+          {
+            "svc__C": "1.0",
+            "svc__gamma": "scale"
+          },
+          {
+            "svc__C": "1.0",
+            "svc__gamma": "scale"
+          },
+          {
+            "svc__C": "1.0",
+            "svc__gamma": "scale"
+          }
+        ],
+        "seconds": 16.5
+      },
+      "random_forest": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.726875,
+        "balanced_accuracy": 0.7191473318231438,
+        "precision": 0.7294484911550468,
+        "recall_sensitivity": 0.7984054669703873,
+        "specificity": 0.6398891966759003,
+        "f1": 0.7623708537248505,
+        "macro_f1": 0.7206417090079065,
+        "roc_auc": 0.8017789423204336,
+        "confusion_matrix": {
+          "tn": 462,
+          "fp": 260,
+          "fn": 177,
+          "tp": 701
+        },
+        "ci95": {
+          "roc_auc": [
+            0.7711103486651641,
+            0.827599148169634
+          ],
+          "balanced_accuracy": [
+            0.6885806502647055,
+            0.7467737012721511
+          ],
+          "f1": [
+            0.7172097986561441,
+            0.7982470911609647
+          ],
+          "recall_sensitivity": [
+            0.7593380531471681,
+            0.8308305867985929
+          ],
+          "specificity": [
+            0.5917478180126694,
+            0.6840960142227521
+          ]
+        },
+        "chosen_params": [
+          {
+            "randomforestclassifier__max_depth": "None",
+            "randomforestclassifier__min_samples_leaf": "5"
+          },
+          {
+            "randomforestclassifier__max_depth": "None",
+            "randomforestclassifier__min_samples_leaf": "5"
+          },
+          {
+            "randomforestclassifier__max_depth": "None",
+            "randomforestclassifier__min_samples_leaf": "1"
+          },
+          {
+            "randomforestclassifier__max_depth": "None",
+            "randomforestclassifier__min_samples_leaf": "5"
+          },
+          {
+            "randomforestclassifier__max_depth": "None",
+            "randomforestclassifier__min_samples_leaf": "5"
+          }
+        ],
+        "seconds": 50.0
+      },
+      "xgboost": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.7375,
+        "balanced_accuracy": 0.7305510509278832,
+        "precision": 0.7410526315789474,
+        "recall_sensitivity": 0.8018223234624146,
+        "specificity": 0.6592797783933518,
+        "f1": 0.7702407002188184,
+        "macro_f1": 0.7320591256196133,
+        "roc_auc": 0.8098107635711986,
+        "confusion_matrix": {
+          "tn": 476,
+          "fp": 246,
+          "fn": 174,
+          "tp": 704
+        },
+        "ci95": {
+          "roc_auc": [
+            0.7841150006056269,
+            0.8336606065269632
+          ],
+          "balanced_accuracy": [
+            0.7027205969554688,
+            0.7563026699161506
+          ],
+          "f1": [
+            0.726192830881255,
+            0.8060003759398496
+          ],
+          "recall_sensitivity": [
+            0.7670296370296371,
+            0.8325827559661277
+          ],
+          "specificity": [
+            0.6168767123287671,
+            0.704583697385545
+          ]
+        },
+        "chosen_params": [
+          {
+            "max_depth": "2",
+            "min_child_weight": "5"
+          },
+          {
+            "max_depth": "2",
+            "min_child_weight": "1"
+          },
+          {
+            "max_depth": "2",
+            "min_child_weight": "5"
+          },
+          {
+            "max_depth": "4",
+            "min_child_weight": "1"
+          },
+          {
+            "max_depth": "4",
+            "min_child_weight": "1"
+          }
+        ],
+        "seconds": 26.4
+      },
+      "temporal_cnn": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.66375,
+        "balanced_accuracy": 0.6517866720511867,
+        "precision": 0.6666666666666666,
+        "recall_sensitivity": 0.7744874715261959,
+        "specificity": 0.5290858725761773,
+        "f1": 0.7165437302423604,
+        "macro_f1": 0.6516666423869253,
+        "roc_auc": 0.7172653790092063,
+        "confusion_matrix": {
+          "tn": 382,
+          "fp": 340,
+          "fn": 198,
+          "tp": 680
+        },
+        "ci95": {
+          "roc_auc": [
+            0.6724971083260912,
+            0.756367000188121
+          ],
+          "balanced_accuracy": [
+            0.6134108935907787,
+            0.6866008331886254
+          ],
+          "f1": [
+            0.6659215769649033,
+            0.7592588828004072
+          ],
+          "recall_sensitivity": [
+            0.7323918299714253,
+            0.812358303633775
+          ],
+          "specificity": [
+            0.46153581267217636,
+            0.5901283718378001
+          ]
+        },
+        "seconds": 26.6
+      }
+    },
+    "random_cv_leaky_reference": {
+      "dummy_prior": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.54875,
+        "balanced_accuracy": 0.5,
+        "precision": 0.54875,
+        "recall_sensitivity": 1.0,
+        "specificity": 0.0,
+        "f1": 0.70863599677159,
+        "macro_f1": 0.354317998385795,
+        "roc_auc": 0.4984856037708466,
+        "confusion_matrix": {
+          "tn": 0,
+          "fp": 722,
+          "fn": 0,
+          "tp": 878
+        },
+        "ci95": {
+          "roc_auc": [
+            0.473462143347987,
+            0.5242670592476334
+          ],
+          "balanced_accuracy": [
+            0.5,
+            0.5
+          ],
+          "f1": [
+            0.6474412127334036,
+            0.7642634615782734
+          ],
+          "recall_sensitivity": [
+            1.0,
+            1.0
+          ],
+          "specificity": [
+            0.0,
+            0.0
+          ]
+        },
+        "chosen_params": [],
+        "seconds": 9.9
+      },
+      "logistic_regression": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.715625,
+        "balanced_accuracy": 0.7127111478492418,
+        "precision": 0.7400681044267877,
+        "recall_sensitivity": 0.7425968109339408,
+        "specificity": 0.682825484764543,
+        "f1": 0.7413303013075612,
+        "macro_f1": 0.7127886759834128,
+        "roc_auc": 0.7947172811539699,
+        "confusion_matrix": {
+          "tn": 493,
+          "fp": 229,
+          "fn": 226,
+          "tp": 652
+        },
+        "ci95": {
+          "roc_auc": [
+            0.7660306053033255,
+            0.8213101596287069
+          ],
+          "balanced_accuracy": [
+            0.6843220953822471,
+            0.7394232521457424
+          ],
+          "f1": [
+            0.700971219776254,
+            0.7757037919973641
+          ],
+          "recall_sensitivity": [
+            0.7036523344199158,
+            0.7777813852813853
+          ],
+          "specificity": [
+            0.6381540659701014,
+            0.7243998955003689
+          ]
+        },
+        "chosen_params": [
+          {
+            "logisticregression__C": "0.01"
+          },
+          {
+            "logisticregression__C": "0.01"
+          },
+          {
+            "logisticregression__C": "0.01"
+          },
+          {
+            "logisticregression__C": "0.01"
+          },
+          {
+            "logisticregression__C": "0.01"
+          }
+        ],
+        "seconds": 13.8
+      },
+      "svm_rbf": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.736875,
+        "balanced_accuracy": 0.7324424687182529,
+        "precision": 0.7513751375137514,
+        "recall_sensitivity": 0.7779043280182233,
+        "specificity": 0.6869806094182825,
+        "f1": 0.7644096250699496,
+        "macro_f1": 0.7332309979560647,
+        "roc_auc": 0.8077694836539856,
+        "confusion_matrix": {
+          "tn": 496,
+          "fp": 226,
+          "fn": 195,
+          "tp": 683
+        },
+        "ci95": {
+          "roc_auc": [
+            0.7787162621328932,
+            0.8323199208515406
+          ],
+          "balanced_accuracy": [
+            0.7081194264012391,
+            0.7543456330972983
+          ],
+          "f1": [
+            0.7259343585417536,
+            0.7977735381002878
+          ],
+          "recall_sensitivity": [
+            0.7447306791569087,
+            0.8101857911576499
+          ],
+          "specificity": [
+            0.6513963982193445,
+            0.7221604979527515
+          ]
+        },
+        "chosen_params": [
+          {
+            "svc__C": "1.0",
+            "svc__gamma": "scale"
+          },
+          {
+            "svc__C": "1.0",
+            "svc__gamma": "scale"
+          },
+          {
+            "svc__C": "1.0",
+            "svc__gamma": "scale"
+          },
+          {
+            "svc__C": "1.0",
+            "svc__gamma": "scale"
+          },
+          {
+            "svc__C": "1.0",
+            "svc__gamma": "scale"
+          }
+        ],
+        "seconds": 16.7
+      },
+      "random_forest": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.734375,
+        "balanced_accuracy": 0.725734955419961,
+        "precision": 0.7318321392016377,
+        "recall_sensitivity": 0.8143507972665148,
+        "specificity": 0.6371191135734072,
+        "f1": 0.77088948787062,
+        "macro_f1": 0.7274521788795478,
+        "roc_auc": 0.80587727711558,
+        "confusion_matrix": {
+          "tn": 460,
+          "fp": 262,
+          "fn": 163,
+          "tp": 715
+        },
+        "ci95": {
+          "roc_auc": [
+            0.777513882799722,
+            0.8305013278507964
+          ],
+          "balanced_accuracy": [
+            0.6981919315848061,
+            0.7528769744944256
+          ],
+          "f1": [
+            0.7283990249805851,
+            0.8060269759040251
+          ],
+          "recall_sensitivity": [
+            0.7799609141801552,
+            0.8439988062106614
+          ],
+          "specificity": [
+            0.5918646661112535,
+            0.6799598015283379
+          ]
+        },
+        "chosen_params": [
+          {
+            "randomforestclassifier__max_depth": "None",
+            "randomforestclassifier__min_samples_leaf": "1"
+          },
+          {
+            "randomforestclassifier__max_depth": "None",
+            "randomforestclassifier__min_samples_leaf": "5"
+          },
+          {
+            "randomforestclassifier__max_depth": "None",
+            "randomforestclassifier__min_samples_leaf": "1"
+          },
+          {
+            "randomforestclassifier__max_depth": "None",
+            "randomforestclassifier__min_samples_leaf": "5"
+          },
+          {
+            "randomforestclassifier__max_depth": "None",
+            "randomforestclassifier__min_samples_leaf": "1"
+          }
+        ],
+        "seconds": 50.9
+      },
+      "xgboost": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.735625,
+        "balanced_accuracy": 0.729950024924438,
+        "precision": 0.7448869752421959,
+        "recall_sensitivity": 0.7881548974943052,
+        "specificity": 0.6717451523545707,
+        "f1": 0.7659103486441616,
+        "macro_f1": 0.7311245928432581,
+        "roc_auc": 0.8179569532871863,
+        "confusion_matrix": {
+          "tn": 485,
+          "fp": 237,
+          "fn": 186,
+          "tp": 692
+        },
+        "ci95": {
+          "roc_auc": [
+            0.7925402421137357,
+            0.840750224650865
+          ],
+          "balanced_accuracy": [
+            0.7056622522616308,
+            0.7523205225437247
+          ],
+          "f1": [
+            0.725741588898483,
+            0.7993835145255339
+          ],
+          "recall_sensitivity": [
+            0.7550481377776073,
+            0.8177927826447043
+          ],
+          "specificity": [
+            0.6342638916683343,
+            0.7087641421175912
+          ]
+        },
+        "chosen_params": [
+          {
+            "max_depth": "2",
+            "min_child_weight": "1"
+          },
+          {
+            "max_depth": "4",
+            "min_child_weight": "1"
+          },
+          {
+            "max_depth": "4",
+            "min_child_weight": "5"
+          },
+          {
+            "max_depth": "2",
+            "min_child_weight": "5"
+          },
+          {
+            "max_depth": "4",
+            "min_child_weight": "1"
+          }
+        ],
+        "seconds": 28.3
+      },
+      "temporal_cnn": {
+        "n": 1600,
+        "positive_rate": 0.54875,
+        "threshold": 0.5,
+        "accuracy": 0.665625,
+        "balanced_accuracy": 0.6506650723439699,
+        "precision": 0.6604303086997194,
+        "recall_sensitivity": 0.8041002277904328,
+        "specificity": 0.49722991689750695,
+        "f1": 0.7252182845403184,
+        "macro_f1": 0.6491215125814123,
+        "roc_auc": 0.7340704446645927,
+        "confusion_matrix": {
+          "tn": 359,
+          "fp": 363,
+          "fn": 172,
+          "tp": 706
+        },
+        "ci95": {
+          "roc_auc": [
+            0.7017495505624433,
+            0.7644275778662079
+          ],
+          "balanced_accuracy": [
+            0.6228156073657055,
+            0.6770544820436774
+          ],
+          "f1": [
+            0.6750269539325104,
+            0.7656879892498346
+          ],
+          "recall_sensitivity": [
+            0.7730195257730248,
+            0.8327278043593833
+          ],
+          "specificity": [
+            0.4504705332360612,
+            0.5445618565178777
+          ]
+        },
+        "seconds": 27.5
+      }
+    }
+  },
+  "quality_only_control": {
+    "features": [
+      "q_n_frames",
+      "q_duration_s",
+      "q_valid_ratio",
+      "q_confidence_mean"
+    ],
+    "all_samples": {
+      "n": 1805,
+      "positive_rate": 0.49806094182825483,
+      "threshold": 0.5,
+      "accuracy": 0.6842105263157895,
+      "balanced_accuracy": 0.6849234002951525,
+      "precision": 0.6334144363341444,
+      "recall_sensitivity": 0.8687430478309233,
+      "specificity": 0.5011037527593819,
+      "f1": 0.7326454033771107,
+      "macro_f1": 0.6734945555451183,
+      "roc_auc": 0.7334381837066939,
+      "confusion_matrix": {
+        "tn": 454,
+        "fp": 452,
+        "fn": 118,
+        "tp": 781
+      },
+      "ci95": {
+        "roc_auc": [
+          0.6889235187918348,
+          0.7775414986013363
+        ],
+        "balanced_accuracy": [
+          0.6516192828999496,
+          0.7202197801446468
+        ],
+        "f1": [
+          0.6775038037838774,
+          0.7806910133554668
+        ],
+        "recall_sensitivity": [
+          0.8416207050936878,
+          0.8940566167049078
+        ],
+        "specificity": [
+          0.44016666666666665,
+          0.5660183158725602
+        ]
+      }
+    },
+    "after_quality_filter": {
+      "n": 1600,
+      "positive_rate": 0.54875,
+      "threshold": 0.5,
+      "accuracy": 0.668125,
+      "balanced_accuracy": 0.646544652603815,
+      "precision": 0.6474086661002549,
+      "recall_sensitivity": 0.8678815489749431,
+      "specificity": 0.425207756232687,
+      "f1": 0.7416058394160584,
+      "macro_f1": 0.6389251904503872,
+      "roc_auc": 0.7119113573407202,
+      "confusion_matrix": {
+        "tn": 307,
+        "fp": 415,
+        "fn": 116,
+        "tp": 762
+      },
+      "ci95": {
+        "roc_auc": [
+          0.6725448796959516,
+          0.7492172116354746
+        ],
+        "balanced_accuracy": [
+          0.6161719944176723,
+          0.6779324526597901
+        ],
+        "f1": [
+          0.6876882386567438,
+          0.7880991488790534
+        ],
+        "recall_sensitivity": [
+          0.8427945675349958,
+          0.8921279160901049
+        ],
+        "specificity": [
+          0.37046392247169446,
+          0.4838375331374594
+        ]
+      }
+    }
+  },
+  "selected_model": "xgboost"
+}

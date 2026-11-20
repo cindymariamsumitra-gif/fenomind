@@ -1,0 +1,13 @@
+# Data: JANGAN di-commit (lisensi & privasi)
+data/
+*.webm
+*.mp4
+*.wav
+.env
+# Cache
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+# Log pelatihan lokal
+artifacts/*.log

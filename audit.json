@@ -1,0 +1,232 @@
+{
+  "lmvd": {
+    "source": "LMVD (He, 2024), figshare doi:10.6084/m9.figshare.25698351.v1, Apache-2.0; label dari GitHub helang818/LMVD",
+    "n_samples_raw": 1823,
+    "deduplication": {
+      "conflicting_label_duplicates_removed": 14,
+      "same_label_duplicates_removed": 4
+    },
+    "n_samples_after_dedup": 1805,
+    "n_participants_reported_by_authors": 1475,
+    "participant_ids_available": false,
+    "class_counts": {
+      "0": 906,
+      "1": 899
+    },
+    "label_order": {
+      "last_depression_id": 1423,
+      "first_normal_id": 602,
+      "positive_rate_per_100_ids": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.01,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.84,
+        1.0,
+        1.0,
+        0.23,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "note": "ID tersusun dalam blok berlabel sama (bukan acak)"
+    },
+    "quality_by_class": {
+      "0": {
+        "valid_ratio": {
+          "count": 906.0,
+          "mean": 0.73,
+          "std": 0.317,
+          "min": 0.0,
+          "25%": 0.59,
+          "50%": 0.87,
+          "75%": 0.983,
+          "max": 1.0
+        },
+        "duration_s": {
+          "count": 906.0,
+          "mean": 380.73,
+          "std": 471.527,
+          "min": 2.48,
+          "25%": 119.767,
+          "50%": 278.423,
+          "75%": 498.572,
+          "max": 8193.097
+        },
+        "confidence_mean": {
+          "count": 906.0,
+          "mean": 0.722,
+          "std": 0.294,
+          "min": 0.0,
+          "25%": 0.602,
+          "50%": 0.851,
+          "75%": 0.952,
+          "max": 0.98
+        }
+      },
+      "1": {
+        "valid_ratio": {
+          "count": 899.0,
+          "mean": 0.939,
+          "std": 0.142,
+          "min": 0.0,
+          "25%": 0.955,
+          "50%": 0.993,
+          "75%": 1.0,
+          "max": 1.0
+        },
+        "duration_s": {
+          "count": 899.0,
+          "mean": 379.799,
+          "std": 391.31,
+          "min": 1.44,
+          "25%": 87.11,
+          "50%": 300.067,
+          "75%": 514.833,
+          "max": 3511.048
+        },
+        "confidence_mean": {
+          "count": 899.0,
+          "mean": 0.917,
+          "std": 0.132,
+          "min": 0.0,
+          "25%": 0.923,
+          "50%": 0.965,
+          "75%": 0.977,
+          "max": 0.98
+        }
+      }
+    },
+    "low_quality": {
+      "0.1": {
+        "n": 102,
+        "positive_rate": 0.059
+      },
+      "0.3": {
+        "n": 139,
+        "positive_rate": 0.094
+      },
+      "0.5": {
+        "n": 205,
+        "positive_rate": 0.102
+      }
+    },
+    "too_few_valid_frames": 31,
+    "after_quality_filter": {
+      "n": 1600,
+      "class_counts": {
+        "1": 878,
+        "0": 722
+      }
+    },
+    "n_features": 117,
+    "missing_values_after_filter": {
+      "cells": 0,
+      "features_with_missing": 0
+    },
+    "duplicates_remaining_after_dedup": {
+      "exact_feature_duplicates": 0,
+      "near_duplicates_dist_lt_0.5": 10,
+      "median_nn_distance": 5.876
+    },
+    "modalities": {
+      "visual": "OpenFace 2.0 per frame (AU intensitas & kehadiran, gaze, 68 landmark 2D, pose)",
+      "audio": "VGGish (tidak dipakai; FENOMIND tidak memakai suara sebagai modality)",
+      "text": "TIDAK ADA (tidak ada transkrip)"
+    }
+  },
+  "indikasi_depresi": {
+    "source": "DatasetIndikasiDepresi (Budiman, 2021), github.com/andrebudiman/DatasetIndikasiDepresi, commit c3cbd20; tanpa lisensi eksplisit",
+    "n_raw_rows": 10082,
+    "readme_claims_rows": 10801,
+    "columns": [
+      "Unnamed: 0",
+      "tweet_id",
+      "length of word",
+      "location",
+      "username",
+      "tweet",
+      "deEmoji",
+      "cleanTweet",
+      "sentiment",
+      "date"
+    ],
+    "missing_values_raw": {
+      "Unnamed: 0": 0,
+      "tweet_id": 0,
+      "length of word": 0,
+      "location": 0,
+      "username": 0,
+      "tweet": 0,
+      "deEmoji": 0,
+      "cleanTweet": 0,
+      "sentiment": 0,
+      "date": 0
+    },
+    "raw_class_counts": {
+      "Tidak Terindikasi": 5617,
+      "Terindikasi Depresi": 4465
+    },
+    "exact_duplicate_rows_cleanTweet": 6194,
+    "tweet_id_precision_lost": true,
+    "n_users_raw": 3571,
+    "users_with_multiple_rows": 2398,
+    "date_range": [
+      "2020-11-09 14:40:00",
+      "2020-12-07 07:02:00"
+    ],
+    "location_counts": {
+      "Jawa Barat": 3631,
+      "Jawa Timur": 3154,
+      "Jawa Tengah": 2690,
+      "Sumatera Utara": 339,
+      "Sumatera Selatan": 176,
+      "Bali": 92
+    },
+    "after_cleaning": {
+      "n_raw_rows": 10082,
+      "n_unmapped_labels": 0,
+      "n_conflicting_label_texts": 12,
+      "n_duplicate_rows_removed": 6104,
+      "n_unique_texts": 3853,
+      "n_groups": 3461,
+      "positive_rate": 0.44640539839086424,
+      "label_counts": {
+        "0": 2133,
+        "1": 1720
+      }
+    },
+    "words_per_text": {
+      "count": 3853.0,
+      "mean": 28.006,
+      "std": 11.528,
+      "min": 4.0,
+      "25%": 18.0,
+      "50%": 28.0,
+      "75%": 38.0,
+      "max": 56.0
+    },
+    "keyword_bias": {
+      "pernah": 0.999,
+      "sendiri": 0.266,
+      "aku": 0.898,
+      "tidak": 0.855
+    },
+    "modalities": {
+      "text": "tweet (bukan jawaban wawancara/refleksi mahasiswa)",
+      "visual": "TIDAK ADA"
+    }
+  },
+  "paired_multimodal": {
+    "available": false,
+    "reason": "Tidak ada participant/session yang sama antara LMVD (vlog Tiongkok/global, tanpa teks) dan DatasetIndikasiDepresi (tweet Indonesia, tanpa video)."
+  }
+}

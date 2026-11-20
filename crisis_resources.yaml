@@ -1,0 +1,22 @@
+# ============================================================================
+# TODO tim: WAJIB diisi dan DIVERIFIKASI oleh tim (rancangan bagian 6).
+# Claude Code tidak boleh mengisi nomor atau kontak apa pun di file ini.
+#
+# Setiap entri: nama layanan, cara menghubungi, jam layanan, dan tanggal
+# terakhir diverifikasi. Setel `verified: true` hanya setelah dicek ulang.
+# Contoh bentuk (BUKAN data nyata):
+#   - name: "<nama layanan>"
+#     contact: "<nomor/tautan>"
+#     hours: "<jam layanan>"
+#     note: "<keterangan singkat>"
+#     verified_on: "YYYY-MM-DD"
+# ============================================================================
+verified: false
+resources: []
+
+# Kalimat umum yang ditampilkan bila daftar di atas masih kosong.
+# Tidak memuat nomor apa pun.
+fallback_text: >-
+  Daftar layanan bantuan belum diisi oleh tim pengembang.
+  Kalau kamu merasa tidak aman sekarang, segera hubungi orang yang kamu percaya
+  atau datangi fasilitas kesehatan terdekat.

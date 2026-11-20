@@ -1,0 +1,19 @@
+# Inti (training + API). Python 3.11+.
+numpy>=1.26
+pandas>=2.1
+scikit-learn==1.9.1     # dikunci: artefak model .joblib dibuat dengan versi ini
+xgboost==3.4.1          # dikunci: idem
+joblib>=1.3
+pyyaml>=6.0
+fastapi>=0.110
+uvicorn>=0.29
+python-multipart>=0.0.9
+remotezip>=0.12        # unduh LMVD per anggota ZIP (HTTP range)
+# Model bahasa & model temporal
+torch>=2.2
+transformers>=4.40
+sentence-transformers>=3.0
+huggingface_hub>=0.23
+# Tes
+pytest>=8.0
+httpx>=0.27
