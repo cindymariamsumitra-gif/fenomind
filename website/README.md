@@ -13,6 +13,11 @@
 
 Kalau situsnya terhubung ke repo GitHub, cukup ganti `index.html` di repo itu dengan file ini.
 
+Tampilan Netlify versi baru tidak selalu menampilkan kotak drag-and-drop. Alternatif yang pasti berhasil:
+buka https://app.netlify.com/drop lalu seret folder berisi `index.html`. Hasilnya situs dengan alamat baru;
+backend sudah mengizinkan semua alamat `https://*.netlify.app`. Di Colab, ganti `WEBSITE` di sel terakhir
+dengan alamat baru itu.
+
 ## Menyambungkan ke backend
 
 Backend harus bisa diakses lewat **HTTPS**, karena website Netlify memakai HTTPS. Pilihannya:
@@ -31,7 +36,7 @@ Alamat ini disimpan di browser, jadi kunjungan berikutnya tidak perlu `?api=` la
 isi `DEFAULT_API` di bagian skrip `index.html`. Tanpa alamat backend, website berjalan dalam **mode demo**
 (tidak mengirim data).
 
-Backend sudah mengizinkan domain Netlify ini (CORS). Kalau domain website berubah, set
+Backend mengizinkan semua alamat `https://*.netlify.app` dan localhost (CORS). Untuk domain lain, set
 `FENOMIND_ALLOWED_ORIGINS=https://domain-baru` saat menjalankan backend.
 
 ## Yang dianalisis

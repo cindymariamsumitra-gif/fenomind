@@ -174,3 +174,12 @@ def test_concat_sessions_offsets_timestamps():
     assert len(c) == 90 and c["timestamp"].is_monotonic_increasing
     assert c["timestamp"].iloc[60] == pytest.approx(a["timestamp"].max() - a["timestamp"].min() + 1.0)
     assert concat_sessions([]) is None
+
+
+def test_cors_allows_any_netlify_subdomain_only():
+    ok = client.get("/v1/health", headers={"Origin": "https://nama-acak-123.netlify.app"})
+    assert ok.headers.get("access-control-allow-origin") == "https://nama-acak-123.netlify.app"
+    bad = client.get("/v1/health", headers={"Origin": "https://evil.example.com"})
+    assert "access-control-allow-origin" not in bad.headers
+    trick = client.get("/v1/health", headers={"Origin": "https://evil.netlify.app.example.com"})
+    assert "access-control-allow-origin" not in trick.headers

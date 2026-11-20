@@ -5,6 +5,7 @@ Dokumentasi interaktif: /docs   Spesifikasi: /openapi.json
 
 Variabel lingkungan:
 - FENOMIND_ALLOWED_ORIGINS   daftar origin website (dipisah koma) untuk CORS, mis. https://fenomind.example
+- FENOMIND_ALLOWED_ORIGIN_REGEX  regex origin tambahan (bawaan: semua https://*.netlify.app)
 - FENOMIND_OPENFACE_BIN      path ke OpenFace FeatureExtraction (opsional; untuk endpoint video)
 - FENOMIND_MAX_UPLOAD_MB     batas unggahan (bawaan 200)
 
@@ -43,7 +44,11 @@ app = FastAPI(
 # Bawaan: website FENOMIND di Netlify + pengembangan lokal. Ganti lewat FENOMIND_ALLOWED_ORIGINS.
 DEFAULT_ORIGINS = "https://resonant-crumble-c5770f.netlify.app,http://localhost:3000,http://127.0.0.1:5500,http://localhost:8080"
 origins = [o.strip() for o in os.environ.get("FENOMIND_ALLOWED_ORIGINS", DEFAULT_ORIGINS).split(",") if o.strip()]
-app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET", "POST"], allow_headers=["*"])
+# Semua subdomain netlify.app diizinkan agar website FENOMIND tetap tersambung walau di-deploy ulang ke
+# alamat Netlify baru. Ganti/kosongkan lewat FENOMIND_ALLOWED_ORIGIN_REGEX.
+origin_regex = os.environ.get("FENOMIND_ALLOWED_ORIGIN_REGEX", r"https://[a-z0-9-]+\.netlify\.app") or None
+app.add_middleware(CORSMiddleware, allow_origins=origins, allow_origin_regex=origin_regex,
+                   allow_methods=["GET", "POST"], allow_headers=["*"])
 
 
 @app.middleware("http")
