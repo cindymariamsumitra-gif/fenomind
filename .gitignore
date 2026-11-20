@@ -1,0 +1,18 @@
+# Data: JANGAN di-commit (lisensi & privasi)
+/data/
+*.webm
+*.mp4
+*.wav
+.env
+# Cache
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+# Log pelatihan lokal
+artifacts/*.log
+# Checkpoint & state resume IndoBERT (besar; dikemas di fenomind-indobert-checkpoints.zip)
+artifacts/text/indobert/checkpoints/
+artifacts/text/indobert/*.pt
+*.tmp
+artifacts/text/indobert/final/

@@ -1,0 +1,67 @@
+{
+  "modality": "linguistic",
+  "model": "indobert_finetune",
+  "base_model": "indobenchmark/indobert-base-p1",
+  "checkpoint": "artifacts/text/indobert/final",
+  "params": {
+    "model": "indobenchmark/indobert-base-p1",
+    "epochs": 3,
+    "lr": 2e-05,
+    "max_len": 96,
+    "batch_size": 16,
+    "seed": 42,
+    "folds": 5,
+    "split": "StratifiedGroupKFold per pengguna"
+  },
+  "preprocess": "fenomind.text.preprocess.clean_text",
+  "threshold": 0.5,
+  "training_data": "DatasetIndikasiDepresi (Budiman, 2021): tweet Indonesia 2020, label oleh penyusun dataset dengan keterlibatan psikolog; tanpa lisensi eksplisit",
+  "metrics_grouped_cv": {
+    "n": 3853,
+    "positive_rate": 0.44640539839086424,
+    "threshold": 0.5,
+    "accuracy": 0.7383856735011679,
+    "balanced_accuracy": 0.7352886261298095,
+    "precision": 0.7072176949941793,
+    "recall_sensitivity": 0.7063953488372093,
+    "specificity": 0.7641819034224098,
+    "f1": 0.7068062827225131,
+    "macro_f1": 0.7353150438917158,
+    "roc_auc": 0.8101760540346057,
+    "confusion_matrix": {
+      "tn": 1630,
+      "fp": 503,
+      "fn": 505,
+      "tp": 1215
+    },
+    "ci95": {
+      "roc_auc": [
+        0.7965853764545574,
+        0.8240476068172289
+      ],
+      "balanced_accuracy": [
+        0.7212030050342263,
+        0.7516710357439903
+      ],
+      "f1": [
+        0.6894162486342942,
+        0.7250733819511626
+      ],
+      "recall_sensitivity": [
+        0.6859111087644616,
+        0.7275396184629781
+      ],
+      "specificity": [
+        0.7461105402896068,
+        0.7835802055010225
+      ]
+    },
+    "folds_completed": 5,
+    "folds_total": 5,
+    "complete": true
+  },
+  "metrics_note": "Metrik = CV 5-fold berbasis pengguna dengan konfigurasi identik; model final dilatih pada semua data.",
+  "validation_status": "VALIDATED_ON_TWEETS_ONLY — domain tweet, belum divalidasi pada jawaban mahasiswa",
+  "min_words": 5,
+  "train_seconds": 938.4
+}

@@ -19,6 +19,7 @@ FENOMIND_ALLOWED_ORIGINS=https://alamat-website-fenomind.example uvicorn fenomin
 | `FENOMIND_ALLOWED_ORIGINS` | Origin website yang boleh memanggil API (CORS), dipisah koma | `http://localhost:3000` |
 | `FENOMIND_OPENFACE_BIN` | Path ke `FeatureExtraction` OpenFace 2.0 untuk endpoint video | tidak diset → endpoint video 501 |
 | `FENOMIND_MAX_UPLOAD_MB` | Batas ukuran unggahan | 200 |
+| `FENOMIND_TEXT_MODEL` | `auto` (IndoBERT bila checkpoint final ada, selain itu TF-IDF), `indobert`, atau `tfidf` | `auto` |
 | `HF_HUB_OFFLINE` | Set `1` setelah model diunduh agar tidak ada akses jaringan | — |
 
 Gunakan HTTPS (reverse proxy) bila API diakses lewat internet; data kesehatan dan biometrik termasuk
@@ -67,7 +68,9 @@ Aturan yang wajib diikuti frontend:
 3. Selalu tampilkan `disclaimer` dan `model.validation_status`.
 4. Jangan menulis "kamu depresi" atau label emosi dari wajah. Pakai teks `interpretation` yang disediakan.
 5. Untuk multimodal, `fusion.combined_probability` selalu `null` selama `fusion.status` = `NOT_TRAINED`.
-   Tampilkan hasil per modality secara terpisah, jangan menggabungkannya sendiri di frontend.
+   Bila perlu satu angka gabungan, pakai `fusion.heuristic` (rata-rata probabilitas modality yang tersedia,
+   status `HEURISTIC_NOT_VALIDATED`), dan beri label "gabungan sederhana, belum divalidasi". Tetap tampilkan
+   hasil per modality. Jangan membuat rumus gabungan sendiri di frontend.
 
 ## Contoh pemanggilan dari website (JavaScript)
 

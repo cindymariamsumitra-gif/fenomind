@@ -91,20 +91,21 @@ Fitur individual teratas: `head_translation_std` (+0.0105), `au_AU26_vel` (+0.01
 | Model | ROC-AUC [CI 95%] | Balanced acc. | Accuracy | Precision | Sensitivity | Specificity | F1 |
 |---|---|---|---|---|---|---|---|
 | Baseline (tebak prior kelas) | 0.500 [0.484–0.515] | 0.500 | 0.554 | 0.000 | 0.000 | 1.000 | 0.000 |
-| TF-IDF + regresi logistik **(dipakai API)** | 0.761 [0.745–0.775] | 0.694 | 0.696 | 0.656 | 0.672 | 0.715 | 0.664 |
+| TF-IDF + regresi logistik | 0.761 [0.745–0.775] | 0.694 | 0.696 | 0.656 | 0.672 | 0.715 | 0.664 |
 | TF-IDF + Linear SVM (terkalibrasi) | 0.758 [0.742–0.773] | 0.688 | 0.697 | 0.685 | 0.597 | 0.779 | 0.638 |
 | TF-IDF + Complement NB | 0.745 [0.728–0.761] | 0.672 | 0.684 | 0.674 | 0.565 | 0.780 | 0.614 |
 | Sentence embedding MiniLM-L12 multibahasa + LR | 0.776 [0.760–0.791] | 0.707 | 0.707 | 0.659 | 0.712 | 0.703 | 0.684 |
 | Sentence embedding multilingual-e5-small + LR | 0.750 [0.735–0.765] | 0.684 | 0.684 | 0.635 | 0.686 | 0.683 | 0.660 |
+| IndoBERT-base-p1 fine-tune **(dipakai API)** | 0.810 [0.797–0.824] | 0.735 | 0.738 | 0.707 | 0.706 | 0.764 | 0.707 |
 
-Confusion matrix model yang dipakai API (TF-IDF + regresi logistik):
+Confusion matrix model yang dipakai API (IndoBERT-base-p1 fine-tune):
 
 | | Prediksi normal | Prediksi depresi/terindikasi |
 |---|---|---|
-| **Label normal** | 1526 (TN) | 607 (FP) |
-| **Label depresi/terindikasi** | 564 (FN) | 1156 (TP) |
+| **Label normal** | 1630 (TN) | 503 (FP) |
+| **Label depresi/terindikasi** | 505 (FN) | 1215 (TP) |
 
-### 2a. Kata dengan bobot terbesar (model TF-IDF + LR final)
+### 2a. Kata dengan bobot terbesar (model pembanding TF-IDF + LR)
 
 - Ke arah *terindikasi*: `pernah ada`, `pernah bisa`, `sedih`, `aku yang`, `apa aku`, `aku pernah`, `namun`, `diri`, `sedangkan`, `pernah tidak`, `pernah mau`, `aku`, `takut`, `rindu`, `tapi kenapa`, `apa`, `pernah tau`, `tidak bisa`, `rasanya`, `sakit hati`
 - Ke arah *tidak terindikasi*: `terimakasih`, `pernah menyesal`, `dan`, `allah`, `dan tidak`, `beli`, `jangan`, `kasih`, `perlu`, `tapi aku`, `itu`, `dari`, `bangga`, `pernah menyesali`, `alhamdulillah`, `ayah`, `ikhlas`, `org yang`, `yakin`, `pernah bilang`
@@ -121,7 +122,11 @@ Tidak ada angka performa fusion yang dilaporkan, karena tidak ada eksperimen fus
 
 - Semua angka berasal dari data yang tidak dipakai melatih model tersebut (out-of-fold); hiperparameter
   dipilih di inner CV, jadi tidak ada seleksi model pada data uji.
-- Model kompleks tidak selalu lebih baik: lihat perbandingan model temporal dan IndoBERT di atas terhadap
-  model tabular/TF-IDF yang sederhana.
+- Model kompleks tidak otomatis lebih baik: 1D-CNN temporal lebih buruk daripada XGBoost tabular pada data
+  visual, sedangkan IndoBERT fine-tune lebih baik daripada TF-IDF pada data teks. Pemilihan model didasarkan
+  pada hasil CV berbasis grup, bukan asumsi.
+- IndoBERT: loss latih turun ke 0,19–0,22 pada epoch 3 dan AUC uji per fold 0,78–0,85
+  (`artifacts/text/indobert/train_log.txt`, `fold_*.json`). Kurva validasi per epoch tidak direkam, jadi
+  besarnya overfitting tidak bisa dinilai pasti; jumlah epoch (3) ditetapkan sebelum melihat hasil.
 - Generalisasi ke mahasiswa Indonesia **belum diketahui**: populasi, bahasa, konteks perekaman, dan definisi
   label berbeda dari kedua dataset latih. Validasi eksternal wajib sebelum dipakai untuk keputusan apa pun.

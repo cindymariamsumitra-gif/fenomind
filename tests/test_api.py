@@ -43,6 +43,7 @@ def test_text_screening():
     assert b["explanation"]["method"] == "leave_one_word_out_occlusion"
     assert b["model"]["validation_status"].startswith("VALIDATED_ON_TWEETS_ONLY")
     assert b["safety"]["triggered"] is False
+    assert b["interpretation"].startswith("Pola bahasa ")
     assert _no_diagnostic_language(b)
 
 
@@ -103,6 +104,9 @@ def test_multimodal_returns_unimodal_results_and_no_fused_score():
     b = r.json()
     assert b["visual"]["probability"] is not None and b["linguistic"]["probability"] is not None
     assert b["fusion"]["status"] == "NOT_TRAINED" and b["fusion"]["combined_probability"] is None
+    h = b["fusion"]["heuristic"]
+    assert h["status"] == "HEURISTIC_NOT_VALIDATED" and h["modalities_used"] == ["linguistic", "visual"]
+    assert h["probability"] == pytest.approx((b["visual"]["probability"] + b["linguistic"]["probability"]) / 2, abs=1e-3)
     assert b["missing_modalities"] == []
 
 
@@ -110,5 +114,14 @@ def test_multimodal_returns_unimodal_results_and_no_fused_score():
 def test_multimodal_missing_modality_and_id_validation():
     b = client.post("/v1/screen/multimodal", data={"text": "aku senang hari ini bisa main bareng teman teman"}).json()
     assert b["missing_modalities"] == ["visual"]
+    assert b["fusion"]["heuristic"]["modalities_used"] == ["linguistic"]
     assert client.post("/v1/screen/multimodal", data={"text": "halo", "participant_id": "../etc"}).status_code == 422
     assert client.post("/v1/screen/multimodal", data={}).status_code == 422
+
+
+@pytest.mark.skipif(not HAS_VISUAL, reason="model visual belum dilatih")
+def test_demo_examples_are_valid_openface_csv():
+    for f in sorted((ROOT / "examples").glob("*.csv")):
+        with open(f, "rb") as fh:
+            b = client.post("/v1/screen/visual", files={"openface_csv": (f.name, fh, "text/csv")}).json()
+        assert b["quality"]["ok"] and 0 <= b["probability"] <= 1, f.name

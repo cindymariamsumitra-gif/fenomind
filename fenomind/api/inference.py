@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 from functools import lru_cache
 from pathlib import Path
@@ -31,8 +32,43 @@ class ModelUnavailable(RuntimeError):
     pass
 
 
+class IndoBertClassifier:
+    """Pembungkus checkpoint IndoBERT final dengan antarmuka predict_proba(list[str]) seperti sklearn."""
+
+    def __init__(self, path: Path):
+        import torch
+        from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+        self.torch = torch
+        self.tok = AutoTokenizer.from_pretrained(path)
+        # Disimpan fp16 untuk menghemat ruang; dijalankan fp32 di CPU.
+        self.model = AutoModelForSequenceClassification.from_pretrained(path, dtype=torch.float32).eval()
+
+    def predict_proba(self, texts) -> np.ndarray:
+        from ..text.finetune import predict_proba
+
+        p = predict_proba(self.model, self.tok, list(texts))
+        return np.column_stack([1 - p, p])
+
+
+def text_backend() -> str:
+    """'indobert' bila checkpoint final ada (bisa dipaksa 'tfidf' lewat FENOMIND_TEXT_MODEL)."""
+    choice = os.environ.get("FENOMIND_TEXT_MODEL", "auto").lower()
+    has_bert = (ARTIFACTS / "text/indobert/final/model.safetensors").exists() and \
+        (ARTIFACTS / "text/indobert/model_meta.json").exists()
+    if choice == "tfidf" or (choice == "auto" and not has_bert):
+        return "tfidf"
+    if not has_bert:
+        raise ModelUnavailable("FENOMIND_TEXT_MODEL=indobert tetapi checkpoint final belum ada "
+                               "(python scripts/train_text.py --indobert-final).")
+    return "indobert"
+
+
 @lru_cache
 def _load(modality: str):
+    if modality == "text" and text_backend() == "indobert":
+        d = ARTIFACTS / "text/indobert"
+        return IndoBertClassifier(d / "final"), json.loads((d / "model_meta.json").read_text())
     d = ARTIFACTS / modality
     if not (d / "model.joblib").exists():
         raise ModelUnavailable(f"Model {modality} belum dilatih. Jalankan scripts/train_{modality}.py.")
@@ -64,6 +100,7 @@ def _model_info(meta: dict) -> dict:
     m = meta["metrics_grouped_cv"]
     return {
         "name": meta["model"],
+        "metrics_note": meta.get("metrics_note", "Metrik = CV 5-fold berbasis grup (out-of-fold)."),
         "validation_status": meta["validation_status"],
         "training_data": meta["training_data"],
         "cv_metrics": {k: m[k] for k in ("roc_auc", "balanced_accuracy", "recall_sensitivity", "specificity", "f1")},
@@ -74,7 +111,7 @@ def _model_info(meta: dict) -> dict:
 def _interpret(prob: float | None, threshold: float, modality: str) -> str:
     if prob is None:
         return "Tidak ada skor: kualitas input tidak memenuhi syarat."
-    src = {"visual": "perilaku wajah", "linguistic": "pola bahasa"}[modality]
+    src = {"visual": "perilaku wajah", "linguistic": "bahasa"}[modality]
     if prob >= threshold:
         return (f"Pola {src} pada input ini lebih mirip dengan sampel berlabel depresi di data latih. "
                 "Ini bukan diagnosis; pertimbangkan untuk berbicara dengan profesional.")
@@ -140,11 +177,37 @@ def screen_openface(frames: pd.DataFrame) -> dict:
     }
 
 
-def fusion_block() -> dict:
+HEURISTIC_THRESHOLD = 0.5
+
+
+def fusion_block(visual: dict | None = None, linguistic: dict | None = None) -> dict:
+    """Blok fusion. ``combined_probability`` (model terlatih) tetap null selama fusion NOT_TRAINED.
+
+    ``heuristic`` adalah gabungan SEDERHANA tanpa pelatihan untuk keperluan tampilan/demo:
+    rata-rata probabilitas modality yang tersedia dan berkualitas cukup. Belum divalidasi:
+    kedua model dilatih pada populasi berbeda, sehingga skalanya belum tentu sebanding.
+    """
     st = current_status()
+    probs = {k: r["probability"] for k, r in (("visual", visual), ("linguistic", linguistic))
+             if r is not None and r.get("probability") is not None}
+    heuristic = None
+    if probs:
+        p = float(np.mean(list(probs.values())))
+        heuristic = {
+            "status": "HEURISTIC_NOT_VALIDATED",
+            "method": "rata-rata probabilitas modality yang tersedia (tanpa bobot terlatih)",
+            "probability": round(p, 4),
+            "screening_flag": bool(p >= HEURISTIC_THRESHOLD),
+            "threshold": HEURISTIC_THRESHOLD,
+            "modalities_used": sorted(probs),
+            "any_modality_flagged": any(v >= HEURISTIC_THRESHOLD for v in probs.values()),
+            "note": "Gabungan sederhana untuk tampilan, bukan model fusion terlatih. Tampilkan bersama hasil "
+                    "per modality dan disclaimer.",
+        }
     return {"status": st["status"], "combined_probability": None, "reason": st.get("reason"),
-            "note": "Hasil per modality ditampilkan terpisah. Skor gabungan tidak dihitung karena model fusion "
-                    "belum dilatih pada data berpasangan yang valid."}
+            "heuristic": heuristic,
+            "note": "Model fusion terlatih belum ada (NOT_TRAINED), jadi combined_probability = null. "
+                    "Lihat 'heuristic' untuk gabungan sederhana yang belum divalidasi."}
 
 
 def models_status() -> dict:

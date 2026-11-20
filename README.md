@@ -1,5 +1,7 @@
 # FENOMIND AI
 
+> **Mau langsung demo?** Lihat [`QUICKSTART.md`](QUICKSTART.md).
+
 Pipeline AI dan backend inference untuk **FENOMIND**: skrining awal pola gejala depresi pada mahasiswa dari
 **perilaku wajah** (visual) dan **teks jawaban** (linguistik). **Bukan alat diagnosis klinis.**
 
@@ -12,9 +14,10 @@ Repo ini hanya berisi AI dan API. Website FENOMIND yang sudah ada tetap dipakai 
 |---|---|---|
 | Audit dataset | ✅ selesai | [`DATASET_AUDIT.md`](DATASET_AUDIT.md) |
 | Model visual (OpenFace → XGBoost) | ✅ dilatih & dievaluasi | hanya pada LMVD (vlog); konfon sumber data terdokumentasi |
-| Model linguistik (TF-IDF + LR) | ✅ dilatih & dievaluasi | hanya pada tweet Indonesia 2020 |
+| Model linguistik (IndoBERT fine-tune; cadangan TF-IDF + LR) | ✅ dilatih & dievaluasi | hanya pada tweet Indonesia 2020 |
 | Pembanding (SVM, RF, 1D-CNN temporal, sentence embedding, IndoBERT) | ✅ dievaluasi | [`docs/RESULTS.md`](docs/RESULTS.md) |
 | Multimodal fusion | ⚠️ **NOT TRAINED / NOT VALIDATED** | arsitektur + eksperimen siap; belum ada data berpasangan |
+| Gabungan untuk tampilan | ⚠️ heuristik (rata-rata), belum divalidasi | `fusion.heuristic` di respons API |
 | Explainability | ✅ | oklusi per kelompok fitur/kata + importance global |
 | Inference API | ✅ | FastAPI, OpenAPI, CORS, tanpa penyimpanan |
 | Validasi pada mahasiswa Indonesia | ❌ belum | syarat sebelum dipakai sungguhan |
@@ -88,7 +91,13 @@ python -m pytest
 
 - `download_lmvd.py` membaca ZIP LMVD 16 GB per anggota lewat HTTP range, mengekstrak fitur di memori, dan
   hanya menyimpan fitur (≈ 35 MB). Data mentah tidak pernah ditulis ke disk.
-- Seed tetap (42). `train_text.py --indobert-only` lama di CPU.
+- Seed tetap (42). `train_text.py --indobert-only` lama di CPU (± 11 menit per fold). Progres disimpan
+  bertahap di `artifacts/text/indobert/`: state resume tiap epoch, lalu setelah tiap fold `fold_k.json`
+  (prediksi + metrik), checkpoint fp16 `checkpoints/fold_k/`, `train_log.txt`, dan metrik gabungan sementara
+  di `artifacts/text/results.json`. Bila terhenti, jalankan perintah yang sama untuk melanjutkan.
+- `python scripts/package_results.py` membuat `fenomind-ai-hasil.zip` (kode, model, metrik) dan
+  `fenomind-indobert-fold1.zip` … `fold5.zip` (checkpoint IndoBERT, ±250 MB per fold) secara atomik; skrip IndoBERT memanggilnya
+  otomatis setelah setiap fold.
 - Data mentah dan turunannya ada di `data/` (diabaikan git). Dataset teks tidak berlisensi eksplisit,
   sehingga tidak didistribusikan ulang.
 

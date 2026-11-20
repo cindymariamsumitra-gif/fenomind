@@ -1,0 +1,93 @@
+[2026-11-19 15:15:39] mulai IndoBERT: {'model': 'indobenchmark/indobert-base-p1', 'epochs': 3, 'lr': 2e-05, 'max_len': 96, 'batch_size': 16, 'seed': 42, 'folds': 5, 'split': 'StratifiedGroupKFold per pengguna'}
+[2026-11-19 15:15:39] fold 1/5 mulai (train 3083, test 770)
+[transformers] You passed `num_labels=2` which is incompatible to the `id2label` map of length `5`.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 10348.99it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: indobenchmark/indobert-base-p1
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[2026-11-19 15:19:16]   epoch 1/3 selesai, rata-rata loss latih 0.6172
+[2026-11-19 15:22:47]   epoch 2/3 selesai, rata-rata loss latih 0.4245
+[2026-11-19 15:26:20]   epoch 3/3 selesai, rata-rata loss latih 0.2089
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  9.78it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  9.76it/s]
+[2026-11-19 15:26:43] fold 1/5 selesai (665s): AUC fold=0.816; AUC gabungan 1 fold=0.816
+[2026-11-19 15:26:45] ZIP diperbarui: fenomind-ai-hasil.zip (1 MB)
+[2026-11-19 15:26:45] ZIP diperbarui: fenomind-indobert-checkpoints.zip (250 MB)
+[2026-11-19 15:26:45] fold 2/5 mulai (train 3083, test 770)
+[transformers] You passed `num_labels=2` which is incompatible to the `id2label` map of length `5`.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 11860.78it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: indobenchmark/indobert-base-p1
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[2026-11-19 15:30:28]   epoch 1/3 selesai, rata-rata loss latih 0.6191
+[2026-11-19 15:34:42]   epoch 2/3 selesai, rata-rata loss latih 0.3924
+[2026-11-19 15:38:43]   epoch 3/3 selesai, rata-rata loss latih 0.1858
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  6.97it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  6.96it/s]
+[2026-11-19 15:39:10] fold 2/5 selesai (746s): AUC fold=0.809; AUC gabungan 2 fold=0.812
+[2026-11-19 15:39:13] ZIP diperbarui: fenomind-ai-hasil.zip (1 MB)
+[2026-11-19 15:39:13] ZIP diperbarui: fenomind-indobert-checkpoints.zip (499 MB)
+[2026-11-19 15:39:13] fold 3/5 mulai (train 3083, test 770)
+[transformers] You passed `num_labels=2` which is incompatible to the `id2label` map of length `5`.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 6500.62it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: indobenchmark/indobert-base-p1
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[2026-11-19 15:43:21]   epoch 1/3 selesai, rata-rata loss latih 0.6184
+[2026-11-19 15:47:30]   epoch 2/3 selesai, rata-rata loss latih 0.3992
+[2026-11-19 15:51:35]   epoch 3/3 selesai, rata-rata loss latih 0.1882
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  4.98it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  4.98it/s]
+[2026-11-19 15:52:03] fold 3/5 selesai (770s): AUC fold=0.808; AUC gabungan 3 fold=0.810
+[2026-11-19 15:52:06] ZIP diperbarui: fenomind-ai-hasil.zip (1 MB)
+[2026-11-19 15:52:06] ZIP diperbarui: fenomind-indobert-checkpoints.zip (749 MB)
+[2026-11-19 15:52:06] fold 4/5 mulai (train 3081, test 772)
+[transformers] You passed `num_labels=2` which is incompatible to the `id2label` map of length `5`.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 6723.48it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: indobenchmark/indobert-base-p1
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[2026-11-19 15:56:02]   epoch 1/3 selesai, rata-rata loss latih 0.6031
+[2026-11-19 16:00:08]   epoch 2/3 selesai, rata-rata loss latih 0.3885
+[2026-11-19 16:04:02]   epoch 3/3 selesai, rata-rata loss latih 0.1870
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  4.76it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  4.75it/s]
+[2026-11-19 16:04:32] fold 4/5 selesai (746s): AUC fold=0.782; AUC gabungan 4 fold=0.803
+[2026-11-19 16:04:38] ZIP diperbarui: fenomind-ai-hasil.zip (1 MB)
+[2026-11-19 16:04:38] ZIP diperbarui: fenomind-indobert-checkpoints.zip (998 MB)
+[2026-11-19 16:04:38] fold 5/5 mulai (train 3082, test 771)
+[transformers] You passed `num_labels=2` which is incompatible to the `id2label` map of length `5`.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 7285.91it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: indobenchmark/indobert-base-p1
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[2026-11-19 16:08:32]   epoch 1/3 selesai, rata-rata loss latih 0.6131
+[2026-11-19 16:12:30]   epoch 2/3 selesai, rata-rata loss latih 0.4273
+[2026-11-19 16:16:18]   epoch 3/3 selesai, rata-rata loss latih 0.2195
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  6.11it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  6.10it/s]
+[2026-11-19 16:16:49] fold 5/5 selesai (731s): AUC fold=0.851; AUC gabungan 5 fold=0.810
+[2026-11-19 16:16:57] ZIP diperbarui: fenomind-ai-hasil.zip (1 MB)
+[2026-11-19 16:16:57] ZIP diperbarui: fenomind-indobert-checkpoints.zip (1248 MB)
+[2026-11-19 16:16:57] IndoBERT AUC=0.810 BA=0.735 F1=0.707 (5/5 fold)

@@ -12,21 +12,24 @@
 
 | | Visual | Linguistik | Fusion |
 |---|---|---|---|
-| Arsitektur | XGBoost (max_depth 2, min_child_weight 5) atas 117 fitur sesi | TF-IDF kata (1–2 gram) + karakter (3–5 gram) → regresi logistik (C = 1) | Late fusion & feature-level fusion |
+| Arsitektur | XGBoost (max_depth 2, min_child_weight 5) atas 117 fitur sesi | IndoBERT-base-p1 fine-tune (3 epoch, lr 2e-5, max 96 token), dilatih ulang pada seluruh data; cadangan: TF-IDF + regresi logistik | Late fusion & feature-level fusion (belum dilatih); API: heuristik rata-rata |
 | Masukan | CSV per frame OpenFace 2.0 (AU, gaze, landmark 2D, pose) | Teks Bahasa Indonesia ≥ 5 kata | Keluaran dua model di atas |
 | Data latih | LMVD (vlog; 1.600 rekaman) | DatasetIndikasiDepresi (tweet 2020; 3.853 teks unik) | — |
 | Status | `VALIDATED_ON_LMVD_ONLY` | `VALIDATED_ON_TWEETS_ONLY` | **`NOT_TRAINED`** |
-| Explainability | Oklusi per kelompok fitur (per prediksi); permutation importance (global) | Oklusi per kata (per prediksi); koefisien kata (global) | — |
+| Explainability | Oklusi per kelompok fitur (per prediksi); permutation importance (global) | Oklusi per kata (per prediksi); koefisien kata model TF-IDF (global, pembanding) | — |
 
 Metrik lengkap, CI 95%, dan model pembanding ada di [`RESULTS.md`](RESULTS.md).
 
 ### Alasan pemilihan model
 - **Visual:** XGBoost punya AUC CV berbasis grup tertinggi di antara model tabular. Model temporal 1D-CNN
   lebih buruk, kemungkinan karena data terlalu sedikit untuk belajar dari urutan.
-- **Linguistik:** API memakai TF-IDF + LR, walaupun sentence embedding MiniLM sedikit lebih tinggi AUC-nya
-  dan CI keduanya tumpang tindih (lihat `RESULTS.md`). Alasannya: bobot per kata bisa diurai langsung, model
-  kecil (tanpa unduhan model 470 MB), dan inference cepat di CPU. Keputusan ini bisa ditinjau ulang setelah
-  ada data validasi dari domain mahasiswa.
+- **Linguistik:** IndoBERT fine-tune adalah model teks terbaik di CV berbasis grup, dan CI 95% AUC-nya tidak
+  tumpang tindih dengan TF-IDF + LR (lihat `RESULTS.md`). API memakainya secara bawaan
+  (`FENOMIND_TEXT_MODEL=auto`). Model final dilatih ulang pada seluruh 3.853 teks dengan konfigurasi yang sama
+  dengan CV. Metrik yang dilaporkan adalah hasil CV, bukan dari data latih. TF-IDF + LR tetap tersedia
+  (`FENOMIND_TEXT_MODEL=tfidf`) bila server tidak sanggup memuat model 500 MB.
+- **Kalibrasi:** probabilitas IndoBERT cenderung ekstrem (mendekati 0 atau 1) dan **belum dikalibrasi**.
+  Perlakukan sebagai skor peringkat, bukan peluang yang sebenarnya.
 
 ## Faktor risiko dan bias yang diketahui
 

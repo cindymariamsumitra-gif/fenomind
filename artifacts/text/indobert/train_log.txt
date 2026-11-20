@@ -1,0 +1,49 @@
+[2026-11-19 15:15:39] mulai IndoBERT: {'model': 'indobenchmark/indobert-base-p1', 'epochs': 3, 'lr': 2e-05, 'max_len': 96, 'batch_size': 16, 'seed': 42, 'folds': 5, 'split': 'StratifiedGroupKFold per pengguna'}
+[2026-11-19 15:15:39] fold 1/5 mulai (train 3083, test 770)
+[2026-11-19 15:19:16]   epoch 1/3 selesai, rata-rata loss latih 0.6172
+[2026-11-19 15:22:47]   epoch 2/3 selesai, rata-rata loss latih 0.4245
+[2026-11-19 15:26:20]   epoch 3/3 selesai, rata-rata loss latih 0.2089
+[2026-11-19 15:26:43] fold 1/5 selesai (665s): AUC fold=0.816; AUC gabungan 1 fold=0.816
+[2026-11-19 15:26:45] ZIP diperbarui: fenomind-ai-hasil.zip (1 MB)
+[2026-11-19 15:26:45] ZIP diperbarui: fenomind-indobert-checkpoints.zip (250 MB)
+[2026-11-19 15:26:45] fold 2/5 mulai (train 3083, test 770)
+[2026-11-19 15:30:28]   epoch 1/3 selesai, rata-rata loss latih 0.6191
+[2026-11-19 15:34:42]   epoch 2/3 selesai, rata-rata loss latih 0.3924
+[2026-11-19 15:38:43]   epoch 3/3 selesai, rata-rata loss latih 0.1858
+[2026-11-19 15:39:10] fold 2/5 selesai (746s): AUC fold=0.809; AUC gabungan 2 fold=0.812
+[2026-11-19 15:39:13] ZIP diperbarui: fenomind-ai-hasil.zip (1 MB)
+[2026-11-19 15:39:13] ZIP diperbarui: fenomind-indobert-checkpoints.zip (499 MB)
+[2026-11-19 15:39:13] fold 3/5 mulai (train 3083, test 770)
+[2026-11-19 15:43:21]   epoch 1/3 selesai, rata-rata loss latih 0.6184
+[2026-11-19 15:47:30]   epoch 2/3 selesai, rata-rata loss latih 0.3992
+[2026-11-19 15:51:35]   epoch 3/3 selesai, rata-rata loss latih 0.1882
+[2026-11-19 15:52:03] fold 3/5 selesai (770s): AUC fold=0.808; AUC gabungan 3 fold=0.810
+[2026-11-19 15:52:06] ZIP diperbarui: fenomind-ai-hasil.zip (1 MB)
+[2026-11-19 15:52:06] ZIP diperbarui: fenomind-indobert-checkpoints.zip (749 MB)
+[2026-11-19 15:52:06] fold 4/5 mulai (train 3081, test 772)
+[2026-11-19 15:56:02]   epoch 1/3 selesai, rata-rata loss latih 0.6031
+[2026-11-19 16:00:08]   epoch 2/3 selesai, rata-rata loss latih 0.3885
+[2026-11-19 16:04:02]   epoch 3/3 selesai, rata-rata loss latih 0.1870
+[2026-11-19 16:04:32] fold 4/5 selesai (746s): AUC fold=0.782; AUC gabungan 4 fold=0.803
+[2026-11-19 16:04:38] ZIP diperbarui: fenomind-ai-hasil.zip (1 MB)
+[2026-11-19 16:04:38] ZIP diperbarui: fenomind-indobert-checkpoints.zip (998 MB)
+[2026-11-19 16:04:38] fold 5/5 mulai (train 3082, test 771)
+[2026-11-19 16:08:32]   epoch 1/3 selesai, rata-rata loss latih 0.6131
+[2026-11-19 16:12:30]   epoch 2/3 selesai, rata-rata loss latih 0.4273
+[2026-11-19 16:16:18]   epoch 3/3 selesai, rata-rata loss latih 0.2195
+[2026-11-19 16:16:49] fold 5/5 selesai (731s): AUC fold=0.851; AUC gabungan 5 fold=0.810
+[2026-11-19 16:16:57] ZIP diperbarui: fenomind-ai-hasil.zip (1 MB)
+[2026-11-19 16:16:57] ZIP diperbarui: fenomind-indobert-checkpoints.zip (1248 MB)
+[2026-11-19 16:16:57] IndoBERT AUC=0.810 BA=0.735 F1=0.707 (5/5 fold)
+[2026-11-19 16:24:46] [final] mulai pelatihan final pada 3853 teks
+[2026-11-19 16:30:03] [final]   epoch 1/3 selesai, rata-rata loss latih 0.6066
+[2026-11-19 16:35:21] [final]   epoch 2/3 selesai, rata-rata loss latih 0.4070
+[2026-11-19 16:40:24] [final]   epoch 3/3 selesai, rata-rata loss latih 0.2015
+[2026-11-19 16:40:25] [final] model final tersimpan di /home/user/fenomind-ai/artifacts/text/indobert/final (938s)
+[2026-11-19 16:40:26] [final] ZIP diperbarui: fenomind-ai-hasil.zip
+[2026-11-19 16:40:26] [final] ZIP diperbarui: fenomind-indobert-fold1.zip
+[2026-11-19 16:40:26] [final] ZIP diperbarui: fenomind-indobert-fold2.zip
+[2026-11-19 16:40:26] [final] ZIP diperbarui: fenomind-indobert-fold3.zip
+[2026-11-19 16:40:26] [final] ZIP diperbarui: fenomind-indobert-fold4.zip
+[2026-11-19 16:40:26] [final] ZIP diperbarui: fenomind-indobert-fold5.zip
+[2026-11-19 16:40:26] [final] ZIP diperbarui: fenomind-indobert-final.zip

@@ -144,7 +144,7 @@ async def screen_multimodal(
     if openface_csv is not None:
         out["visual"] = _guard(inf.screen_openface, _parse_openface(await _read_limited(openface_csv)))
     out["missing_modalities"] = [k for k in ("visual", "linguistic") if out[k] is None]
-    out["fusion"] = inf.fusion_block()
+    out["fusion"] = inf.fusion_block(out["visual"], out["linguistic"])
     out["safety"] = (out["linguistic"] or {}).get("safety", {"triggered": False})
     out["disclaimer"] = inf.DISCLAIMER
     return out

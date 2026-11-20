@@ -58,7 +58,9 @@ def main() -> None:
     timp = json.loads((A / "text/global_importance.json").read_text()) if (A / "text/global_importance.json").exists() else None
     fusion = json.loads((A / "fusion/status.json").read_text())
     vsel = v["selected_model"]
-    tsel = json.loads((A / "text/model_meta.json").read_text())["model"]
+    tsel = (json.loads((A / "text/indobert/model_meta.json").read_text())["model"]
+            if (A / "text/indobert/final/model.safetensors").exists()
+            else json.loads((A / "text/model_meta.json").read_text())["model"])
     vg, vr = v["protocols"]["grouped_cv"], v["protocols"]["random_cv_leaky_reference"]
     tg = t["protocols"]["grouped_cv"]
     d = v["dataset"]
@@ -143,7 +145,7 @@ def main() -> None:
         "",
     ]
     if timp:
-        lines += ["### 2a. Kata dengan bobot terbesar (model TF-IDF + LR final)", "",
+        lines += ["### 2a. Kata dengan bobot terbesar (model pembanding TF-IDF + LR)", "",
                   "- Ke arah *terindikasi*: " + ", ".join(f"`{d['term']}`" for d in timp["toward_indicated"][:20]),
                   "- Ke arah *tidak terindikasi*: " + ", ".join(f"`{d['term']}`" for d in timp["toward_not_indicated"][:20]),
                   "", "Bobot ini mencerminkan pola di tweet 2020 hasil crawling kata kunci, bukan penanda klinis.", ""]
@@ -158,8 +160,12 @@ def main() -> None:
         "",
         "- Semua angka berasal dari data yang tidak dipakai melatih model tersebut (out-of-fold); hiperparameter",
         "  dipilih di inner CV, jadi tidak ada seleksi model pada data uji.",
-        "- Model kompleks tidak selalu lebih baik: lihat perbandingan model temporal dan IndoBERT di atas terhadap",
-        "  model tabular/TF-IDF yang sederhana.",
+        "- Model kompleks tidak otomatis lebih baik: 1D-CNN temporal lebih buruk daripada XGBoost tabular pada data",
+        "  visual, sedangkan IndoBERT fine-tune lebih baik daripada TF-IDF pada data teks. Pemilihan model didasarkan",
+        "  pada hasil CV berbasis grup, bukan asumsi.",
+        "- IndoBERT: loss latih turun ke 0,19–0,22 pada epoch 3 dan AUC uji per fold 0,78–0,85",
+        "  (`artifacts/text/indobert/train_log.txt`, `fold_*.json`). Kurva validasi per epoch tidak direkam, jadi",
+        "  besarnya overfitting tidak bisa dinilai pasti; jumlah epoch (3) ditetapkan sebelum melihat hasil.",
         "- Generalisasi ke mahasiswa Indonesia **belum diketahui**: populasi, bahasa, konteks perekaman, dan definisi",
         "  label berbeda dari kedua dataset latih. Validasi eksternal wajib sebelum dipakai untuk keputusan apa pun.",
         "",

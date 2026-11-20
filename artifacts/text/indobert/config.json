@@ -1,0 +1,10 @@
+{
+  "model": "indobenchmark/indobert-base-p1",
+  "epochs": 3,
+  "lr": 2e-05,
+  "max_len": 96,
+  "batch_size": 16,
+  "seed": 42,
+  "folds": 5,
+  "split": "StratifiedGroupKFold per pengguna"
+}
