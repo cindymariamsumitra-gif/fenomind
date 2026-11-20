@@ -10,9 +10,16 @@ Butuh Python 3.11 atau lebih baru.
 pip install -r requirements.txt
 ```
 
-Untuk model teks IndoBERT, ekstrak `fenomind-indobert-final.zip` di folder yang sama dengan
-`fenomind-ai/`, sehingga ada `fenomind-ai/artifacts/text/indobert/final/model.safetensors`.
-Tanpa file itu, API otomatis memakai model teks TF-IDF.
+**Model teks IndoBERT** (250 MB) tidak ada di repo karena melebihi batas 100 MB GitHub.
+Unduh `fenomind-indobert-final.zip` dari halaman **Releases → V0.1**, ekstrak, lalu salin folder
+`final` di dalamnya (`fenomind-ai/artifacts/text/indobert/final/`) ke folder proyek ini, sehingga ada:
+
+```
+artifacts/text/indobert/final/model.safetensors
+```
+
+Tanpa folder itu, API otomatis memakai model teks TF-IDF yang lebih ringan. Cek backend yang aktif di
+`GET /v1/models` (kolom `text.name`: `indobert_finetune` atau `tfidf_logreg`).
 
 ## 2. Jalankan server
 
