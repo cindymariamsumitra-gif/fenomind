@@ -42,7 +42,7 @@ app = FastAPI(
                 "linguistik (teks Bahasa Indonesia). Fusion berstatus NOT_TRAINED.",
 )
 # Bawaan: website FENOMIND di Netlify + pengembangan lokal. Ganti lewat FENOMIND_ALLOWED_ORIGINS.
-DEFAULT_ORIGINS = "https://resonant-crumble-c5770f.netlify.app,http://localhost:3000,http://127.0.0.1:5500,http://localhost:8080"
+DEFAULT_ORIGINS = "https://deluxe-bienenstitch-f6dc66.netlify.app,https://resonant-crumble-c5770f.netlify.app,http://localhost:3000,http://127.0.0.1:5500,http://localhost:8080"
 origins = [o.strip() for o in os.environ.get("FENOMIND_ALLOWED_ORIGINS", DEFAULT_ORIGINS).split(",") if o.strip()]
 # Semua subdomain netlify.app diizinkan agar website FENOMIND tetap tersambung walau di-deploy ulang ke
 # alamat Netlify baru. Ganti/kosongkan lewat FENOMIND_ALLOWED_ORIGIN_REGEX.

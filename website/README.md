@@ -1,5 +1,7 @@
 # Website FENOMIND (tersambung ke AI)
 
+**Website aktif: https://deluxe-bienenstitch-f6dc66.netlify.app** (di-deploy lewat Netlify Drop).
+
 - `index.html`: versi website yang memanggil backend FENOMIND AI. Tampilan dan alur sama dengan
   website asli; halaman **Session Overview** kini menampilkan hasil analisis.
 - `index.original.html`: salinan website asli (sebelum disambungkan), untuk perbandingan.
@@ -29,7 +31,7 @@ Backend harus bisa diakses lewat **HTTPS**, karena website Netlify memakai HTTPS
 Lalu buka website dengan alamat backend di parameter `api`:
 
 ```
-https://resonant-crumble-c5770f.netlify.app/?api=https://xxxx.trycloudflare.com
+https://deluxe-bienenstitch-f6dc66.netlify.app/?api=https://xxxx.trycloudflare.com
 ```
 
 Alamat ini disimpan di browser, jadi kunjungan berikutnya tidak perlu `?api=` lagi. Untuk alamat permanen,
