@@ -2,6 +2,8 @@
 
 Tidak perlu mengunduh dataset atau melatih ulang: model sudah ada di folder `artifacts/`.
 
+**Paling mudah: Google Colab** [![Buka di Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/cindymariamsumitra-gif/fenomind/blob/main/notebooks/colab_demo.ipynb). Buka, lalu jalankan sel dari atas ke bawah.
+
 ## 1. Pasang (sekali)
 
 Butuh Python 3.11 atau lebih baru.

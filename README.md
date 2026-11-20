@@ -1,6 +1,6 @@
 # FENOMIND AI
 
-> **Mau langsung demo?** Lihat [`QUICKSTART.md`](QUICKSTART.md).
+> **Mau langsung demo?** [![Buka di Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/cindymariamsumitra-gif/fenomind/blob/main/notebooks/colab_demo.ipynb) (tanpa instalasi), atau lihat [`QUICKSTART.md`](QUICKSTART.md).
 
 Pipeline AI dan backend inference untuk **FENOMIND**: skrining awal pola gejala depresi pada mahasiswa dari
 **perilaku wajah** (visual) dan **teks jawaban** (linguistik). **Bukan alat diagnosis klinis.**
